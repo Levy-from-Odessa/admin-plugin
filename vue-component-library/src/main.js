@@ -1,15 +1,16 @@
+
 import * as components from './components'
 
-
 const ComponentLibrary = {
- install(Vue) {
-   // components
-   for (const componentName in components) {
-    const component = components[componentName]
+  install(Vue, options = {}) {
+    console.log(options);
+    // components
+    for (const componentName in components) {
+      const component = components[componentName]
 
-    Vue.component(component.name, component)
+      Vue.component(component.name, component)
+    }
   }
- }
 }
 
 export default ComponentLibrary
