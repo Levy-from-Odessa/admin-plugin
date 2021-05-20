@@ -1,6 +1,6 @@
 {
   "name": "savtest",
-  "version": "0.0.12",
+  "version": "0.0.13",
   "private": false,
   "main": "dist/index.umd.min.js",
   "files": [
@@ -27,8 +27,9 @@
     "babel-eslint": "^10.1.0",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^6.2.2",
+    "node-sass": "^6.0.0",
     "postcss-loader": "^4.2.0",
-    "sass-loader": "^10",
+    "sass-loader": "^10.2.0",
     "vue-template-compiler": "^2.6.11"
   },
   "eslintConfig": {
