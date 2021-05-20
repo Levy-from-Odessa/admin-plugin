@@ -1,6 +1,7 @@
 
 import * as components from './components'
 
+console.log(components);
 const ComponentLibrary = {
   install(Vue, options = {}) {
     console.log(options);
