@@ -60,6 +60,7 @@
 
 <script>
 export default {
+    name: 'TableTitle',
     props: {
         topTable:{
             type: Object,

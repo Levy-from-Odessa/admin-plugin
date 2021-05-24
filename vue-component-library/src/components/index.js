@@ -5,4 +5,5 @@ const components = {
   ...UI,
   Button
 }
+
 export default components

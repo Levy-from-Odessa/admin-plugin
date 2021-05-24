@@ -1,5 +1,6 @@
 <template>
   <div class="">
+    loading...
     <div class="background"/>
     <div class="loader">
       <div class="yellow"></div>
@@ -19,7 +20,7 @@ export default {
 </script>
 
 
-<style lang="scss" scoped>
+<style lang="scss" >
 $yellow: #feb60a;
 $red: #ff0062;
 $blue: #00dbf9;

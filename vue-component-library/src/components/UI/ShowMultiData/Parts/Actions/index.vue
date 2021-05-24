@@ -42,11 +42,11 @@
 
 
     <!-- toggle details -->
-    <TableActionMoreInfo 
+    <!-- <TableActionMoreInfo 
       v-if="actions.details"
       :row="row"
       @toggle="$emit('toggleDetails', $event)"
-    />
+    /> -->
 
 
   </div>

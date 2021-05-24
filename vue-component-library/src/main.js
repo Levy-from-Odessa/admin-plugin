@@ -1,5 +1,4 @@
-
-import * as components from './components'
+import components from './components'
 
 console.log(components);
 const ComponentLibrary = {

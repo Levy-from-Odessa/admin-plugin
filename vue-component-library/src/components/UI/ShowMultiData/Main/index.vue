@@ -104,11 +104,11 @@
             </div>
           </template>
         </div>
-      <ModalDelete 
+      <!-- <ModalDelete 
         @close="showDeleteModal = false" 
         @delete="onDeleteForm"
         :show="showDeleteModal" 
-      />
+      /> -->
     </div>
 </template>
 
@@ -127,13 +127,14 @@ import TableActions from '../Parts/Actions'
 import TableLoader from '../Parts/Loader'
 
 // DELETE
-import DeleteMixin from '@/mixins/Notifications/DeleteMixin'
-import ModalDelete from '@/components/UI/Modal/Delete'
+// import DeleteMixin from '@/mixins/Notifications/DeleteMixin'
+// import ModalDelete from '@/components/UI/Modal/Delete'
 
 /**
  * Advanced table component
  **/
 export default {
+  name: 'ShowMultiData',
   page: {
     title: "Advanced Table",
     meta: [
@@ -146,7 +147,7 @@ export default {
   mixins: [
     getData, 
     permissions, 
-    DeleteMixin
+    // DeleteMixin
   ],
 
   components: {
@@ -158,7 +159,7 @@ export default {
       TableActions,
       TableLoader,
 
-      ModalDelete,
+      // ModalDelete,
   },
   data() {
     return {

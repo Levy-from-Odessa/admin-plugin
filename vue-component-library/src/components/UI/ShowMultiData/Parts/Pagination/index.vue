@@ -18,6 +18,7 @@
 
 <script>
 export default {
+    name: 'TablePagination',
     props:{
         rows:{
             type: Number,

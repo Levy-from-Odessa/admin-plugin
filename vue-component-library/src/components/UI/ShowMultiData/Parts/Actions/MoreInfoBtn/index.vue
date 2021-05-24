@@ -13,6 +13,7 @@
 
 <script>
 export default {
+  name: 'uiTableActionsMore',
   props: {
     row: {
       type: Object,

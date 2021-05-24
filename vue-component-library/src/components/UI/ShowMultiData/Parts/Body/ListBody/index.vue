@@ -24,6 +24,7 @@
 
 <script>
 export default {
+  name: 'ListBodyTable',
   props:{
     items:{
       type: Array,
