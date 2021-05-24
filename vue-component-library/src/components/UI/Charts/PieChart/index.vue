@@ -11,17 +11,17 @@
           :series="pieChart.series"
           :options="pieChart.chartOptions"
         />
-        <Text />
+        <TestText />
       </div>
     </div>
 </template>
 
 <script>
-import Text from './Text'
+import TestText from './TestText'
 export default {
   name: 'uiChartsPiechart',
   components:{
-    Text
+    TestText
   },
   props: {
     title: {
