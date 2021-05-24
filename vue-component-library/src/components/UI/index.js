@@ -15,7 +15,7 @@ import Loader from './Loader/Main'
 // import Progress from './Progress'
 // import TopProgress from './Progress/TopProgress'
 
-// import ShowMultiData from './ShowMultiData/index'
+import ShowMultiData from './ShowMultiData/Main'
 
 export default {
   Alert,
@@ -30,5 +30,5 @@ export default {
   // Status,
   // Progress,
   // TopProgress,
-  // ...ShowMultiData
+  ShowMultiData
 }
