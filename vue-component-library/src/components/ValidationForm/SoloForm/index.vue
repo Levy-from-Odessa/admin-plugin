@@ -21,7 +21,7 @@
 import { validationMixin } from 'vuelidate'
 import BaseInput from '../Fields/BaseInput'
 // import BaseSelect from '../Fields/BaseSelect'
-import { validationRules } from '@/mixins/validationRules'
+import validationRules from '@/utils/ValidationRules'
 
 export default {
   name: 'FtthValSoloForm',

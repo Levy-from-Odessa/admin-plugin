@@ -158,7 +158,7 @@
 
 
 <script>
-import { layoutMethods } from "@/state/helpers";
+// import { layoutMethods } from "@/state/helpers";
 import simplebar from "simplebar-vue";
 
 /**
@@ -186,7 +186,7 @@ export default {
     };
   },
   methods: {
-    ...layoutMethods,
+    // ...layoutMethods,
     hide() {
       this.$parent.toggleRightSidebar();
     },

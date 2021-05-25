@@ -29,35 +29,20 @@
 import i18n from "@/i18n";
 export default {
   name: 'FtthLanguageSwitcher',
-  data() {
-    return {
-      languages: [
+  props:{
+    languages:{
+      type: Array,
+      default: () =>[
         {
           flag: require("@/assets/images/flags/us.jpg"),
           language: "en",
           title: "English",
         },
-        // {
-        //   flag: require("@/assets/images/flags/french.jpg"),
-        //   language: "fr",
-        //   title: "French",
-        // },
-        // {
-        //   flag: require("@/assets/images/flags/spain.jpg"),
-        //   language: "es",
-        //   title: "Spanish",
-        // },
-        // {
-        //   flag: require("@/assets/images/flags/chaina.png"),
-        //   language: "zh",
-        //   title: "Chinese",
-        // },
-        // {
-        //   flag: require("@/assets/images/flags/arabic.png"),
-        //   language: "ar",
-        //   title: "Arabic",
-        // },
-      ],
+      ] 
+    }
+  },
+  data() {
+    return {
       lan: i18n.locale,
       text: null,
       flag: null,
