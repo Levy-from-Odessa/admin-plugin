@@ -7,6 +7,11 @@
     ></b-spinner>
 </template>
 
+<script>
+export default {
+  name: 'FtthMainLoader',
+}
+</script>
 
 
 <style lang="css" >

@@ -29,6 +29,7 @@
 
 <script>
 export default {
+  name: 'FtthTopProgress',
   props: {
     title:{
       type: String,

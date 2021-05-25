@@ -35,7 +35,7 @@
 
 
 export default {
-  name: 'uiModalView',
+  name: 'FtthModalView',
   props:{
     title: {
       type: String,

@@ -12,8 +12,9 @@ module.exports = {
           'css-loader',
           'sass-loader'
         ]
-      }
-    ]
+      },
+    ],
   },
   // plugin omitted
+  
 }

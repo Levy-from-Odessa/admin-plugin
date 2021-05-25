@@ -43,6 +43,7 @@
  * Stat component -- specify the widget icon, title and value.
  */
 export default {
+  name: 'FtthProgress',
   props: {
     title: {
       type: String,

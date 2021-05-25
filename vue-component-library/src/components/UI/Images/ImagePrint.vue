@@ -4,6 +4,8 @@
 
 <script>
 export default {
+  name: 'FtthImagePrint',
+
   props: {
     imageUrl: {
       type: String,

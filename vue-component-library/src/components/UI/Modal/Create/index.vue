@@ -28,6 +28,7 @@
 
 <script>
 export default { 
+    name: 'FtthModalCreate',
     props: {
         show:{
             type:Boolean,

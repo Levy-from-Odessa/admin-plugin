@@ -134,7 +134,7 @@ import TableLoader from '../Parts/Loader'
  * Advanced table component
  **/
 export default {
-  name: 'ShowMultiData',
+  name: 'FtthShowMultiData',
   page: {
     title: "Advanced Table",
     meta: [

@@ -15,7 +15,7 @@
 
 
 export default {
-  name: 'layoutLoader',
+  name: 'FtthMainLoader',
 }
 </script>
 

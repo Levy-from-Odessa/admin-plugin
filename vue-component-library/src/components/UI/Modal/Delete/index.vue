@@ -23,6 +23,7 @@
 
 <script>
 export default {
+    name: 'FtthModalDelete',
     props: {
         show:{
             type:Boolean,

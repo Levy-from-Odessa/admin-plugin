@@ -26,7 +26,7 @@
 
 
 export default {
-    name: 'uiModalInfo',
+    name: 'FtthModalInfo',
     props:{
         title: {
             type: String,

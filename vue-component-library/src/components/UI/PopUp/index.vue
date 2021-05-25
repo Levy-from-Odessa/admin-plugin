@@ -37,7 +37,8 @@
 <script>
 
 export default {
-    props:{ 
+  name: 'FtthModalPopup',
+  props:{ 
         show:{
             type: Boolean,
             default: () => false

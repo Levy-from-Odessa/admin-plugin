@@ -36,7 +36,7 @@ import { mapActions, mapGetters } from 'vuex'
 
 
 export default {
-  name: 'uiAlert',
+  name: 'FtthAlert',
 
   data() {
     return {

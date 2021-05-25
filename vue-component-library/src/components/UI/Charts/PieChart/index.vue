@@ -11,18 +11,13 @@
           :series="pieChart.series"
           :options="pieChart.chartOptions"
         />
-        <TestText />
       </div>
     </div>
 </template>
 
 <script>
-import TestText from './TestText'
 export default {
-  name: 'uiChartsPiechart',
-  components:{
-    TestText
-  },
+  name: 'FtthPieChart',
   props: {
     title: {
       type: String,
