@@ -18,14 +18,19 @@
                 @setFilter="filter = $event"
                 @toggleTemplate="tableViewTemplate = $event"
             >
+              <template #button>
+                <slot
+                  name="title-button"
+                />
+              </template>
               <template #search>
                 <slot
-                  name="search"
+                  name="title-search"
                   :query="query"
                 />
               </template>
               <template #header>
-                <slot name="header"/>
+                <slot name="title-header"/>
               </template>
             </TableTitle>
 

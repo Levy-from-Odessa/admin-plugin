@@ -37,6 +37,7 @@ const ComponentLibrary = {
 
       console.log(util);
       Vue[utilName] = util
+      Vue.prototype['$' + utilName] = util
     }
 
 

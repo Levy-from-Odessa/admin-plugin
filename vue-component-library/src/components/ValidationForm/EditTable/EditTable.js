@@ -1,8 +1,8 @@
 
 // MIXINS
-import getData from '@/components/UI/ShowMultiData/getData'
+import getData from '../../../components/UI/ShowMultiData/getData'
 import EditItemsMixin from '@/mixins/Converters/EditItemsMixin'
-import MixinSchema  from '@/mixins/Generator/SchemaMixin'
+import MixinSchema  from '../../../mixins/Generator/SchemaMixin'
 // PARTS
 import Headers from './Parts/Headers'
 import Actions from './Parts/Actions'
