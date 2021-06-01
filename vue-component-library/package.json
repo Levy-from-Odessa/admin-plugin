@@ -1,6 +1,6 @@
 {
   "name": "savtest",
-  "version": "0.0.42",
+  "version": "0.0.43",
   "private": false,
   "main": "dist/index.umd.min.js",
   "files": [
