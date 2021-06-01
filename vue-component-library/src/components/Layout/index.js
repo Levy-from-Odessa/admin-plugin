@@ -1,25 +1,38 @@
-import Footer from './Footer'
 
-import NavBar from './NavBar'
-import Lang from './NavBar/Lang'
+const modulesCache = {}
+const componentsData = {  }
 
-import PageHeader from './PageHeader'
+;(function updateModules() {
+  // https://webpack.js.org/guides/dependency-management/#require-context
+  const requireModule = require.context(
+    // Search for files in the current directory.
+    '.',
+    // Search for files in subdirectories.
+    true,
+    // Include any .js files that are not this file or a unit test.
+    /index\.vue$/
+  )
 
-import RightBar from './RightBar'
+  requireModule.keys().forEach((fileName) => {
+    const moduleDefinition = requireModule(fileName)
+    const componentName = moduleDefinition.default.name
 
-import SideBar from './SideBar' 
-import SideNav from './SideBar/SideNav'
+    // const modules = moduleDefinition
+    // Skip the module during hot reload if it refers to the
+    // same module definition as the one we have cached.
+    if (modulesCache[fileName] === moduleDefinition) return
+
+    // Update the module cache, for efficient hot reloading.
+    modulesCache[fileName] = moduleDefinition
+
+    storeData[componentName] = {
+      // Modules are namespaced by default.
+      ...moduleDefinition.default,
+    }
+  })
+
+})()
 
 
-export default {
-  Footer,
-  NavBar,
-  Lang,
-  PageHeader,
-  RightBar,
-  SideNav,
-  SideBar,
-}
-/*
-  ? val undefined - name wasnt set
-*/
+
+export default storeData

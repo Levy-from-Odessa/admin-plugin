@@ -44,16 +44,6 @@
         <transition name="search-item">
           <div class="search-item" v-if="showSearch">
                 <slot name="search" :query="query"/>
-
-                <!-- <b-form-group
-                    v-if="slotExist('search')"
-                    label-cols-lg="4"
-                    label="Search"
-                >
-                    <b-form-input
-                        v-model="headerFilter"
-                    />
-                </b-form-group> -->
           </div>
         </transition>
     </div>

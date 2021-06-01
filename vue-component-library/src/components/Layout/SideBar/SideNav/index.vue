@@ -63,6 +63,7 @@
                 </ul>
             </li>
         </template>
+        {{menuItems}}
     </ul>
 </div>
 <!-- Sidebar -->

@@ -5,7 +5,7 @@
       class="side-nav-link-ref" 
    >
    
-      <i :class="`bx ${item.icon}`" v-if="item.icon"></i>
+      <i :class="`${item.icon}`" v-if="item.icon"></i>
 
       <span @click="$emit('updateNavBar')">
         {{ (item.label) }}

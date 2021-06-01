@@ -13,6 +13,7 @@ const ComponentLibrary = {
     for (const componentName in components) {
       const component = components[componentName]
 
+      console.log(component.name);
       if (component.name === undefined) {
         console.log(`${component.__file} doesnt have name, pls set COMPONENT name and try again `);
       }
@@ -35,7 +36,6 @@ const ComponentLibrary = {
     for (const utilName in utils)  {
       const util = utils[utilName]
 
-      console.log(util);
       Vue[utilName] = util
       Vue.prototype['$' + utilName] = util
     }
