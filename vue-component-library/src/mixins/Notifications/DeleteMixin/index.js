@@ -19,7 +19,6 @@ export default {
       this.$emit('close')
     },
     setDeleteItem(id){
-      console.log(id);
       this.deleteItemId = id
       this.showDeleteModal = true
     },

@@ -57,7 +57,7 @@
                   details: actions.details
                 }"
                 @filtered="onFiltered"
-                @delete="setDeleteIteh($event.id)" 
+                @delete="setDeleteItem($event.id)" 
                 @view="$emit('view', $event)"
               >
               <!-- Cols -->
@@ -109,11 +109,11 @@
             </div>
           </template>
         </div>
-      <!-- <ModalDelete 
+      <ModalDelete 
         @close="showDeleteModal = false" 
         @delete="onDeleteForm"
         :show="showDeleteModal" 
-      /> -->
+      />
     </div>
 </template>
 
@@ -132,8 +132,8 @@ import TableActions from '../Parts/Actions'
 import TableLoader from '../Parts/Loader'
 
 // DELETE
-// import DeleteMixin from '@/mixins/Notifications/DeleteMixin'
-// import ModalDelete from '@/components/UI/Modal/Delete'
+import DeleteMixin from '@/mixins/Notifications/DeleteMixin'
+import ModalDelete from '@/components/UI/Modal/Delete'
 
 /**
  * Advanced table component
@@ -150,12 +150,14 @@ export default {
   },
   
   mixins: [
+    DeleteMixin,
     getData, 
     permissions, 
     // DeleteMixin
   ],
 
   components: {
+      ModalDelete,
       TableGridBody,
       TableListBody,
 

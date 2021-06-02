@@ -59,10 +59,10 @@ export default {
                 const { name } = itemProp
 
                 // ignore
-                itemProp.show = !ignoreArray.includes(name)
+                itemProp.show = !ignoreArray.includes(name) || ignoreArray.includes('all')
 
                 // readonly
-                itemProp.allowEdit = !readonlyArray.includes(name)
+                itemProp.allowEdit = !readonlyArray.includes(name) || readonlyArray.includes('all')
 
                 // delete
                 itemProp.allowDelete = deleteArray.includes(name)

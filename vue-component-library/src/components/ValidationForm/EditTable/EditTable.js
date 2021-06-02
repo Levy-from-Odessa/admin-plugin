@@ -96,7 +96,10 @@ export default {
   watch:{
     dataGetter(items){
       const editData = items.data || items 
-      this.editSchemas = this.schemaGenerator(editData, 'BaseInput')
+      this.editSchemas = {
+        ...this.schemaGenerator(editData, 'BaseInput'),
+        ...this.schemas
+      }
       this.editItems = Object.assign(
         [], 
         this.toEditItemsProp(

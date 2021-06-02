@@ -48,7 +48,7 @@ export default {
         view: false,
         delete: false,
         details: false,
-        pagination: false
+        pagination: true
       })
     },
     viewTemplate: {
@@ -76,13 +76,12 @@ export default {
               const { actions: { fetchData, propsData } } = this.copyStore
               const payload = {...query, ...propsData} 
 
-              this.query = query
+              this.query = payload
 
 
               this.$store.dispatch(`${this.store.name}/${fetchData}`, 
-              { 
-                query: payload || '' 
-              })
+                payload 
+              )
           }
       },
     },
