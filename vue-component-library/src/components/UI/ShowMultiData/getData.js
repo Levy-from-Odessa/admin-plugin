@@ -77,6 +77,7 @@ export default {
               const payload = {...query, ...propsData} 
 
               this.query = payload
+              console.log(payload);
 
 
               this.$store.dispatch(`${this.store.name}/${fetchData}`, 
@@ -89,9 +90,9 @@ export default {
         this.fetch()
     },
     watch: {
-      store () {
-        this.fetch()
-      },
+      // store () {
+      //   this.fetch()
+      // },
       dataGetter(getter){
         if (getter) {
           this.dataTable =  getter
