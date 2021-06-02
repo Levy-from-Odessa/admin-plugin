@@ -111,14 +111,11 @@ export default {
        && `cell(${key})`;
     },
 
+    itemProvider(){
+      return Object.assign([], this.items) || []
+    }
 
   },
-
-  computed: {
-      itemProvider(){
-        return  Object.assign([], this.items) || []
-      }
-  }
   
 }
 </script>
