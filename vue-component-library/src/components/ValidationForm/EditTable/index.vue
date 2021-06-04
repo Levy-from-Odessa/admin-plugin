@@ -9,7 +9,6 @@
           </div>
         </div>
             <b-table-simple hover  responsive>
-                <!-- <Headers :headers="headers" /> -->
                 <b-tbody>
                     <template
                         v-for="(item ) in editItems"
@@ -18,43 +17,55 @@
                             v-if="item.show"
                             :key="item.id"
                         >
-                          <template v-for="(header) in headers">
-                            <template
-                                  v-if="header.key"
+                            <template 
+                              v-for="header in headers" 
+                            >
+                            <!--
+                              FLEX TD depend on header.key 
+                                slot - {{header.key}} - {{item.name}} 
+                                default - {{item[header.key]}}
+                            -->
+                              <template
+                                v-if="header.key !== 'value' && header.key !== 'action'"  
                               >
-                              <!-- slot -->
                                 <td 
-                                  v-if="slotExist(header.label+'-'+item[header.key])"
-                                  :key="header.label + 'field'"
+                                  :key="header.key + '-' +  item.name"
+                                  v-if="slotExist(header.key + '-' +  item.name)"
                                 >
                                   <slot 
-                                    :name="header.label+'-'+item[header.key]" 
+                                    :name="header.key + '-' +  item.name" 
                                     :item="item" 
                                   />
                                 </td>
-                              <!-- slot -->
-                              <!-- value -->
                                 <td 
                                   v-else
-                                  :key="header.label + 'field'"
+                                  :key="header.key + '-' +  item.name"
                                 >
-                                    <h6> {{item[header.key] }}</h6>
+                                    <h6>  {{item[header.key] }}</h6>
                                 </td>
-                              <!-- value -->
+                              <!-- FLEX TD -->
+                              </template>
 
+                              <template v-if="header.key === 'value'">
 
-                                <td :key="header.key + 'val'">
+                                <!-- 
+                                  VALUE TD
+                                    always item.value, can be soloform by schema
+                                    slot - value-{{item.name}}
+                                    default - {{ item[header.key] | dynamic(item.fieldType)  }}
+                                 -->
+                                <td :key="header.key + '-' + item.name">
                                   <template v-if="!item.editMode">
                                     <template 
-                                      v-if="slotExist(header.key+'-'+item[header.key])"
+                                      v-if="slotExist(header.key + '-' + item.name)"
                                     >
                                       <slot 
-                                        :name="header.key+'-'+item[header.key]" 
+                                        :name="header.key + '-' + item.name" 
                                         :item="item" 
                                       />
                                     </template>
                                     <template v-else>
-                                        {{item.value }}
+                                        {{ item[header.key] | dynamic(item.fieldType)   }}
                                     </template>
                                   </template>
                                   <SoloForm
@@ -65,12 +76,22 @@
                                       @submit-form="closeEditMode(item.name)"
                                   />
                                 </td>
-                                <td :key="header.key + 'action'">
+                                <!-- VALUE TD -->
+                              </template>
+
+                              <template v-if="header.key === 'action'">
+                                <!-- 
+                                  ACTION TD
+                                    always item.action, btn wich toggle edit mode
+                                    slot - action-{{item.name}}
+                                    default - BTN
+                                 -->
+                                <td :key="header.key + '-' + item.name">
                                     <template 
-                                      v-if="slotExist('action'+'-'+item[header.key])"
+                                      v-if="slotExist(header.key + '-' + item.name)"
                                     >
                                       <slot 
-                                        :name="'action'+'-'+item[header.key]" 
+                                        :name="header.key + '-' + item.name" 
                                         :item="item" 
                                       />
                                     </template>
@@ -86,13 +107,11 @@
                                       />
                                     </template>
                                 </td>
-
+                                <!-- ACTION TD --->
+                              </template>
                             </template>
-                              
-                          </template>
-
-                        </tr>
-                    </template>
+                          </tr>
+                      </template>
                 </b-tbody>
             </b-table-simple>
         </div>

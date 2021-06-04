@@ -1,7 +1,7 @@
 
 // MIXINS
 import getData from '../../../components/UI/ShowMultiData/getData'
-import EditItemsMixin from '@/mixins/Converters/EditItemsMixin'
+import EditItemsMixin from '../../../mixins/Converters/EditItemsMixin'
 import MixinSchema  from '../../../mixins/Generator/SchemaMixin'
 // PARTS
 import Headers from './Parts/Headers'
@@ -36,24 +36,17 @@ export default {
     readOnlyArray:{
       type: Array,
       default: () => []
-    }
+    },
  
   },
   data () {
     return{
       editItems: [],
       editSchemas: {}
-
-
     }
   },
   methods: {
     openEditMode (itemName) {
-      // this.editItems.forEach((item) => {
-      //   if (item.editMode) {
-      //     this.closeEditMode(item.name)
-      //   }
-      // })
       this.editItems.forEach((item) => {
         if (item.name === itemName) {
           item.editMode = true

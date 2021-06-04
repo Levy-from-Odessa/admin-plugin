@@ -13,7 +13,6 @@ const ComponentLibrary = {
     for (const componentName in components) {
       const component = components[componentName]
 
-      console.log(component.name);
       if (component.name === undefined) {
         console.log(`${component.__file} doesnt have name, pls set COMPONENT name and try again `);
       }
@@ -28,8 +27,7 @@ const ComponentLibrary = {
       if (mixin.name === undefined) {
         console.log(`${mixin.__file} doesnt have name, pls set MIXIN name and try again `);
       }
-      console.log(mixin);
-      Vue.mixin( mixins)
+      Vue.mixin(mixins)
     }
 
     // utils
@@ -47,7 +45,6 @@ const ComponentLibrary = {
 
 
 if (typeof window !== 'undefined' && window.Vue) {
-  console.log('USE');
   window.Vue.use(ComponentLibrary)
 }
 export default ComponentLibrary

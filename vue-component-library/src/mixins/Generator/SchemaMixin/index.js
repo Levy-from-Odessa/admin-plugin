@@ -1,7 +1,12 @@
 export default {
   name: 'SchemaMixin',
   methods: {
-    schemaGenerator (allItems, component, options = []) {
+    schemaGenerator (
+      allItems,
+      component, 
+      options = [],
+      type
+     ) {
       const res = {}
       if (Array.isArray(allItems)) {
         allItems.forEach((item) => {
@@ -9,6 +14,7 @@ export default {
             res[`${item.name}Schema`] = {
               soloForm: item.name,
               component,
+              type: type || item.fieldType || 'text',
               options,
               validations: {
                 required: {
@@ -27,6 +33,7 @@ export default {
               soloForm: item,
               component,
               options,
+              type: type || item.fieldType || 'text',
               showLabel: 'label',
               showValue: 'value',
               validations: {

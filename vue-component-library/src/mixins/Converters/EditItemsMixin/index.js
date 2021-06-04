@@ -7,6 +7,7 @@ export default {
                 const editItem = Object.assign({}, item)
                 for (const key in editItem) {
                     const itemProp = {
+                        ...editItem,
                         name: key,
                         value: editItem[key],
                         show: true,
@@ -14,7 +15,8 @@ export default {
                         allowDelete: false,
                         editMode: false,
                         table: false,
-                        directEdit: false
+                        directEdit: false,
+                        
                     }
                     res.push(itemProp)
                 }
@@ -22,7 +24,7 @@ export default {
             } else {
                 return JSON.parse(JSON.stringify(item))
             }
-
+            
         },
         setSelectSchema(schemaName, itemProp) {
             let value = itemProp.value
@@ -32,28 +34,28 @@ export default {
                 if (Array.isArray(itemProp.value) && itemProp.value.length > 0) {
                     value = itemProp.value.map(objVal => (
                         objVal[itemProp.schema.showValue]
-                    ))
+                        ))
+                    }
+                } 
+                return {
+                    value,
+                    directEdit
                 }
-            } 
-            return {
-                value,
-                directEdit
-            }
-
-        },
-        toEditItemsProp (
-            item,
-            ignoreArray = [''],
-            readonlyArray = [''],
-            tableArray = [''],
-            deleteArray = ['']
-        )
-        {
-            const editItemsProp = []
-            let arrayOfValues = this.setFields(item)
-            
-            ignoreArray.push('@context', '@id', '@type')
-            readonlyArray.push('id')
+                
+            },
+            toEditItemsProp (
+                item,
+                ignoreArray = [''],
+                readonlyArray = [''],
+                tableArray = [''],
+                deleteArray = ['']
+                )
+                {
+                    const editItemsProp = []
+                    let arrayOfValues = this.setFields(item)
+                    
+                    ignoreArray.push('@context', '@id', '@type')
+                    readonlyArray.push('id')
 
             arrayOfValues.forEach((itemProp) => {
                 const { name } = itemProp
@@ -96,6 +98,7 @@ export default {
                     itemProp.editMode = false
                     editItemsProp.push(itemProp)
                 }
+                
 
 
                 // !UPDATE PERMISSIONS

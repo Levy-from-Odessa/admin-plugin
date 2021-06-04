@@ -21,6 +21,11 @@ export default {
         },
         {
           label: 'Value',
+          key: 'value'
+        },
+        {
+          label: 'Action',
+          key: 'action'
         }
       ]
     },
@@ -54,6 +59,10 @@ export default {
     viewTemplate: {
       type: String,
       default: () => 'grid'
+    },
+    readyItems: {
+      type: Array,
+      default: () => null
     }
   },
     data() {
@@ -77,7 +86,6 @@ export default {
               const payload = {...query, ...propsData} 
 
               this.query = payload
-              console.log(payload);
 
 
               this.$store.dispatch(`${this.store.name}/${fetchData}`, 
@@ -90,9 +98,6 @@ export default {
         this.fetch()
     },
     watch: {
-      // store () {
-      //   this.fetch()
-      // },
       dataGetter(getter){
         if (getter) {
           this.dataTable =  getter
@@ -127,6 +132,9 @@ export default {
             }})
         },
         dataGetter(){
+          if (this.readyItems) {
+            return this.readyItems
+          }
           const { actions: { getData } } = this.copyStore
           return this.$store.getters[`${this.store.name}/${getData}`] 
         },
