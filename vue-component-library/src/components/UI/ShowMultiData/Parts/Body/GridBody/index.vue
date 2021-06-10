@@ -83,7 +83,7 @@ export default {
       required: true
     },
     items:{
-      type: Array.type,
+      type: Array,
       default: () => []
     },
     actions:{
@@ -96,6 +96,11 @@ export default {
       required: true
     },
     
+  },
+  watch: {
+    items() {
+      this.$refs.table.refresh()
+    }
   },
   methods:{
     cusToggleDetails(row) {
@@ -111,8 +116,8 @@ export default {
        && `cell(${key})`;
     },
 
-    itemProvider(){
-      return Object.assign([], this.items) || []
+    itemProvider (){
+      return (this.items || [])
     }
 
   },

@@ -63,6 +63,10 @@ export default {
     readyItems: {
       type: Array,
       default: () => null
+    },
+    noPermissions: {
+      type: Boolean,
+      default: () => false
     }
   },
     data() {

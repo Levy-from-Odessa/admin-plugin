@@ -85,7 +85,6 @@ export default {
 
   },
 
-
   watch:{
     dataGetter(items){
       const editData = items.data || items 
