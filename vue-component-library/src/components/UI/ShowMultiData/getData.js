@@ -2,7 +2,7 @@ export default {
   props: {
     store: {
       type: Object,
-      required: true
+      default: () => ({})
     },
     /*
     {name: str, actions: {
@@ -99,7 +99,12 @@ export default {
       },
     },
     mounted () {
+      if (this.readyItems) {
+        this.dataTable =  this.readyItems
+        this.filteredData = this.readyItems
+      } else{
         this.fetch()
+      }
     },
     watch: {
       dataGetter(getter){
@@ -151,6 +156,6 @@ export default {
 
         isMainLoading(){
           return this.$store.getters[`${this.store.name}/isMainLoading`]
-        },
+        }
     },
 }

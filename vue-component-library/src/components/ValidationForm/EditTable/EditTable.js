@@ -81,12 +81,9 @@ export default {
     },
     slotExist(name){
       return typeof this.$scopedSlots[name] !== 'undefined'
-    }
+    },
 
-  },
-
-  watch:{
-    dataGetter(items){
+    setSchemas(items){
       const editData = items.data || items 
       this.editSchemas = {
         ...this.schemaGenerator(editData, 'BaseInput'),
@@ -101,6 +98,18 @@ export default {
         )
       )
     }
+
+  },
+  mounted(){
+    if (this.readyItems) {
+      this.setSchemas(this.readyItems)
+    }
+  },
+
+  watch:{
+    dataGetter(items){
+      this.setSchemas(items)
+    },
   }
 
 }
