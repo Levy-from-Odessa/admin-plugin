@@ -22,10 +22,10 @@ export default {
 
     // Vue.set(state.oneId, created['@id'], created)
     state.allIds.data.push(created)
+    state.allIds.totalItems++
     Object.assign(state, {
       oneId: created,
       created,
-      allIds: state.allIds.totalItems++
     })
   },
   [types.SET_DELETED]: (state, id) => {

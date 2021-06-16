@@ -200,7 +200,7 @@ export default {
       this.currentPage = 1;
     },
     setCurrentPage (page) {
-      this.fetch({page})
+      this.fetch({ ...this.query, page})
     },
     gomycell(key) {
       return this.slotExist(key)

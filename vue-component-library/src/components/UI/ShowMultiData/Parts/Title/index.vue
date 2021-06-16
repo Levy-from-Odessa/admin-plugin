@@ -11,25 +11,25 @@
             </div>
 
             <div class="col-2 ">
-                <slot name="button"/>
-                <button
-                    v-if="topTable.create"
-                    class="btn btn-success "
-                    @click="$emit('create')"
-                >
-                    <i class="fas fa-plus font-size-16"></i>
-                </button>
-                <template  v-if="topTable.search">
+                 <b-button-group>
+                    <slot name="button"/>
+                    <button
+                        v-if="topTable.create"
+                        class="btn btn-success "
+                        @click="$emit('create')"
+                    >
+                        <i class="fas fa-plus font-size-16"></i>
+                    </button>
                     <b-button 
+                        v-if="topTable.search"
                         @click="showSearch = !showSearch"
                         class="m-1"
                         variant="primary"
                     >
                     <i :class="`font-size-16 fas fa-${showSearch ? 'times' : 'search'}`"></i>
                     </b-button>
-                </template>
-                <template  v-if="topTable.toggleView">
                     <b-button 
+                        v-if="topTable.toggleView"
                         @click="changeTemplate"
                         class="m-1"
                         variant="outline-primary"
@@ -38,7 +38,7 @@
                         fas
                         fa-${tableViewIcon()}`"/>
                     </b-button>
-                </template>
+                </b-button-group>
             </div>
         </div>
         <transition name="search-item">
