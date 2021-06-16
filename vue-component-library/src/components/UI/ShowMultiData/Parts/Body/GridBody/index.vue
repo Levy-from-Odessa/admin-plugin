@@ -19,6 +19,7 @@
       
       :value="value"
       @input="$emit('input', $event)"
+      @row-dblclicked="$emit('view', $event)"
 
       @filtered="$emit('filtered', $event)"
     >

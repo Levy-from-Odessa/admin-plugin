@@ -1,13 +1,13 @@
 
 <template>
-    <div class="card">
+    <div class="card EditTable">
         <div class="card-body">
-        <div class="row d-flex justify-content-between algin-items-center">
-          <div class="col"></div>
-          <div class="col-5">
-            <slot name="header"/>
+          <div class="row d-flex justify-content-between algin-items-center">
+            <div class="col"></div>
+            <div class="col-5">
+              <slot name="header"/>
+            </div>
           </div>
-        </div>
             <b-table-simple hover  responsive>
                 <b-tbody>
                     <template
@@ -32,16 +32,20 @@
                                   :key="header.key + '-' +  item.name"
                                   v-if="slotExist(header.key + '-' +  item.name)"
                                 >
-                                  <slot 
-                                    :name="header.key + '-' +  item.name" 
-                                    :item="item" 
-                                  />
+                                  <div class="td-content">
+                                    <slot 
+                                      :name="header.key + '-' +  item.name" 
+                                      :item="item" 
+                                    />
+                                  </div>
                                 </td>
                                 <td 
                                   v-else
                                   :key="header.key + '-' +  item.name"
                                 >
+                                  <div class="td-content">
                                     <h6>  {{item[header.key] }}</h6>
+                                  </div>
                                 </td>
                               <!-- FLEX TD -->
                               </template>
@@ -55,26 +59,28 @@
                                     default - {{ item[header.key] | dynamic(item.fieldType)  }}
                                  -->
                                 <td :key="header.key + '-' + item.name">
-                                  <template v-if="!item.editMode">
-                                    <template 
-                                      v-if="slotExist(header.key + '-' + item.name)"
-                                    >
-                                      <slot 
-                                        :name="header.key + '-' + item.name" 
-                                        :item="item" 
-                                      />
+                                  <div class="td-content">
+                                    <template v-if="!item.editMode">
+                                      <template 
+                                        v-if="slotExist(header.key + '-' + item.name)"
+                                      >
+                                        <slot 
+                                          :name="header.key + '-' + item.name" 
+                                          :item="item" 
+                                        />
+                                      </template>
+                                      <template v-else>
+                                          {{ item[header.key] | dynamic(item.fieldType)   }}
+                                      </template>
                                     </template>
-                                    <template v-else>
-                                        {{ item[header.key] | dynamic(item.fieldType)   }}
-                                    </template>
-                                  </template>
-                                  <SoloForm
-                                      v-else
-                                      :ref="`${item.name}Form`"
-                                      v-model="item.value"
-                                      :schema="item.schema"
-                                      @submit-form="closeEditMode(item.name)"
-                                  />
+                                    <SoloForm
+                                        v-else
+                                        :ref="`${item.name}Form`"
+                                        v-model="item.value"
+                                        :schema="item.schema"
+                                        @submit-form="closeEditMode(item.name)"
+                                    />
+                                  </div>
                                 </td>
                                 <!-- VALUE TD -->
                               </template>
@@ -87,6 +93,7 @@
                                     default - BTN
                                  -->
                                 <td :key="header.key + '-' + item.name">
+                                  <div class="td-content">
                                     <template 
                                       v-if="slotExist(header.key + '-' + item.name)"
                                     >
@@ -106,6 +113,7 @@
                                           @open-mode="openEditMode(item.name)" 
                                       />
                                     </template>
+                                  </div>
                                 </td>
                                 <!-- ACTION TD --->
                               </template>
@@ -120,7 +128,7 @@
 
 <script src="./EditTable.js"></script>
 
-<style lang="css" scoped>
+<style lang="scss" scoped>
 .input{
   animation-name: shakeError;
   animation-fill-mode: forwards;
@@ -147,4 +155,24 @@
   100% {
     transform: translateX(0); } 
  }
+
+
+.EditTable{
+  .table-responsive{
+    tbody{
+      tr{
+        td{
+          padding: 0 !important;
+          .td-content{
+            padding: 5px;
+            height: 50px;
+            h6{
+              color: rgba(8, 8, 109, 0.76);
+            }
+          }
+        }
+      }
+    }
+  }
+}
 </style>

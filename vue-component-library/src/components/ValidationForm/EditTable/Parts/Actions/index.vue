@@ -4,6 +4,7 @@
       v-if="!editMode && allowEdit && !directEdit"
       @click="$emit('open-mode')"
       variant="outline-light"
+      size="sm"
     >
        <i  class="mdi mdi-18px mdi-pencil "></i> 
     </b-button>
@@ -11,6 +12,7 @@
       v-if="editMode && !directEdit"
       @click="$emit('close-mode')"
       variant="outline-light"
+      size="sm"
     >
        <i  class="mdi mdi-18px mdi-check "></i> 
     </b-button>
