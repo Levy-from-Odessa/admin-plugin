@@ -1,6 +1,5 @@
 <template>
 <div class="">
-
     <b-table
       hover
       ref="table"

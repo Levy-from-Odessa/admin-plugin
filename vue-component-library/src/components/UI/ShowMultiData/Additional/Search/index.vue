@@ -3,7 +3,7 @@
       <div class="col-12">
         <b-btn 
           variant="outline-warning"
-          @click="editQuery = {}"
+          @click="clear"
         >
           Clear
         </b-btn>
@@ -43,7 +43,17 @@ export default {
         this.$emit('search', value.allValues)
       }
     }
-  }
+  },
+
+  methods: {
+    clear() {
+      const emptyQuery = Object.assign({}, this.editQuery)
+      Object.keys(emptyQuery).forEach(key => {
+        emptyQuery[key] = ''
+      })
+      this.$emit('search', emptyQuery)
+    }
+  },
   
 }
 </script>

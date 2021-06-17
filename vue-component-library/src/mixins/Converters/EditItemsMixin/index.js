@@ -32,9 +32,10 @@ export default {
             if (schemaName === 'BaseSelect') {
                 directEdit = true
                 if (Array.isArray(itemProp.value) && itemProp.value.length > 0) {
-                    value = itemProp.value.map(objVal => (
-                        objVal[itemProp.schema.showValue]
-                        ))
+                    value = itemProp.value.map(objVal => {
+                            const showValue = itemProp.schema.showValue || 'value'
+                            return objVal[showValue]
+                        })
                     }
                 } 
                 return {

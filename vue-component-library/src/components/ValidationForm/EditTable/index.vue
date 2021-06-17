@@ -15,7 +15,7 @@
                     >
                         <tr
                             v-if="item.show"
-                            :key="item.id"
+                            :key="item.id + item.name"
                         >
                             <template 
                               v-for="header in headers" 
@@ -58,7 +58,7 @@
                                     slot - value-{{item.name}}
                                     default - {{ item[header.key] | dynamic(item.fieldType)  }}
                                  -->
-                                <td :key="header.key + '-' + item.name">
+                                <td :key="header.key + '-' + item.name ">
                                   <div class="td-content">
                                     <template v-if="!item.editMode">
                                       <template 

@@ -67,6 +67,10 @@ export default {
     noPermissions: {
       type: Boolean,
       default: () => false
+    },
+    searchSchema:{
+      type: Object,
+      default: () => {}
     }
   },
     data() {
@@ -86,17 +90,26 @@ export default {
     methods: {
       fetch (query = {}) {
         if (this.copyStore.actions) {
-              const { actions: { fetchData, propsData } } = this.copyStore
-              const payload = {...query, ...propsData} 
+          const { actions: { fetchData, propsData } } = this.copyStore
+          const payload = { ...this.routeQuery, ...query, ...propsData } 
+          console.log(payload);
+          
+          this.query = payload
 
-              this.query = payload
 
 
-              this.$store.dispatch(`${this.store.name}/${fetchData}`, 
-                payload 
-              )
+          this.putUrlQuery(payload)
+
+          this.$store.dispatch(`${this.store.name}/${fetchData}`, 
+            payload 
+          )
           }
       },
+      putUrlQuery(payload){
+        const query = payload 
+        const name = this.$route.name
+        this.$router.replace({ name ,query }).catch(()=>{})
+      }
     },
     mounted () {
       if (this.readyItems) {
@@ -153,9 +166,12 @@ export default {
         currentPage(){
           return this.$store.getters[`${this.store.name}/pageNumber`] 
         },
-
         isMainLoading(){
           return this.$store.getters[`${this.store.name}/isMainLoading`]
+        },
+        routeQuery(){
+          return this.$route.query
         }
+
     },
 }

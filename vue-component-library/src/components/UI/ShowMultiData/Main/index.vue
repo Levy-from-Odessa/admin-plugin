@@ -24,6 +24,11 @@
                 />
               </template>
               <template #search>
+                <Search
+                  @search="fetch"
+                  :schema="searchSchema"
+                  :query="query"
+                />
                 <slot
                   name="title-search"
                   :query="query"
@@ -135,6 +140,8 @@ import TableLoader from '../Parts/Loader'
 import DeleteMixin from '@/mixins/Notifications/DeleteMixin'
 import ModalDelete from '@/components/UI/Modal/Delete'
 
+// Additional
+import Search from '../Additional/Search'
 /**
  * Advanced table component
  **/
@@ -165,6 +172,8 @@ export default {
       TablePagination,
       TableActions,
       TableLoader,
+
+      Search,
 
       // ModalDelete,
   },
