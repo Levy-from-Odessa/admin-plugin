@@ -34,6 +34,13 @@
                   :query="query"
                 />
               </template>
+              <template #propreties> 
+                <Propreties 
+                  :headers="headers"
+                  @change-header="changeHeader"
+                />
+              </template>
+
               <template #header>
                 <slot name="title-header"/>
               </template>
@@ -142,6 +149,7 @@ import ModalDelete from '@/components/UI/Modal/Delete'
 
 // Additional
 import Search from '../Additional/Search'
+import Propreties from '../Additional/Propreties'
 /**
  * Advanced table component
  **/
@@ -174,6 +182,7 @@ export default {
       TableLoader,
 
       Search,
+      Propreties
 
       // ModalDelete,
   },
@@ -217,7 +226,17 @@ export default {
     },
     slotExist(name){
       return typeof this.$scopedSlots[name] !== 'undefined'
-    }
+    },
+
+    changeHeader(currHeader, show) {
+      const index = this.headers.findIndex(header => header.key === currHeader.key)
+      const newHeaders = Object.assign([], this.headers) 
+      newHeaders[index].show = show === 'hide' ? false : true
+      this.headers = newHeaders
+      console.log(this.headers);
+    },
+
+
 
   },
 

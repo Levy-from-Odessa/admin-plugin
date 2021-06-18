@@ -10,7 +10,7 @@
                 <slot name="header"/>
             </div>
 
-            <div class="col-2 ">
+            <div class="col-3 ">
                  <b-button-group>
                     <slot name="button"/>
                     <button
@@ -18,25 +18,28 @@
                         class="btn btn-success "
                         @click="$emit('create')"
                     >
-                        <i class="fas fa-plus font-size-16"></i>
+                        <i class="fas fa-plus "></i>
                     </button>
                     <b-button 
                         v-if="topTable.search"
                         @click="showSearch = !showSearch"
-                        class="m-1"
                         variant="primary"
                     >
-                    <i :class="`font-size-16 fas fa-${showSearch ? 'times' : 'search'}`"></i>
+                        <i :class="` fas fa-${showSearch ? 'times' : 'search'}`"></i>
+                    </b-button>
+                    <b-button 
+                        @click="showProp = !showProp"
+                    >
+                        <i :class="` fas fa-cog`"></i>
                     </b-button>
                     <b-button 
                         v-if="topTable.toggleView"
                         @click="changeTemplate"
-                        class="m-1"
                         variant="outline-primary"
                     >
-                    <i :class="`font-size-16
-                        fas
-                        fa-${tableViewIcon()}`"/>
+                        <i :class="`
+                            fas
+                            fa-${tableViewIcon()}`"/>
                     </b-button>
                 </b-button-group>
             </div>
@@ -46,12 +49,17 @@
                 <slot name="search" :query="query"/>
           </div>
         </transition>
+        <transition name="search-item">
+          <div class="search-item" v-if="showProp">
+                <slot name="propreties" :query="query"/>
+          </div>
+        </transition>
     </div>
 </template>
 
 <script>
 export default {
-    name: 'TableTitle',
+    name: 'FtthTableTitle',
     props: {
         topTable:{
             type: Object,
@@ -77,6 +85,7 @@ export default {
     data() {
         return {
             showSearch: false,
+            showProp: false,
         }
     },
     computed:{
@@ -122,4 +131,11 @@ export default {
 
 <style lang="scss" scoped>
 
+.propreties{
+    .btn{
+        position: absolute;
+        top: 10px;
+        right: -40px;
+    }
+}
 </style>
