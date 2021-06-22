@@ -36,8 +36,8 @@
               </template>
               <template #propreties> 
                 <Propreties 
-                  :headers="headers"
-                  @change-header="changeHeader"
+                  :headers="showMultiDataHeaders"
+                  @change-header="changeHeaderVisible"
                 />
               </template>
 
@@ -51,7 +51,7 @@
             <TableLoader 
                 :isMainLoading="isMainLoading"
                 :dataTableLength="dataTable && dataTable.length"
-                :headersLength="headers.length"
+                :headersLength="showMultiDataHeaders.length"
             />
 
           <template v-if="dataTable && dataTable.length !== 0">
@@ -75,7 +75,7 @@
               <!-- Cols -->
                 <template 
                     #[gomycell(header.key)]="{item}" 
-                    v-for="header in headers"
+                    v-for="header in showMultiDataHeaders"
                 >
                     <slot
                       :name="header.key"
@@ -135,6 +135,7 @@
 
 import permissions from '../permissions'
 import getData from '../getData'
+import headerBuilder from '../headerBuilder'
 /* eslint-disable vue/no-unused-components */
 import TableGridBody from '../Parts/Body/GridBody'
 import TableListBody from '../Parts/Body/ListBody'
@@ -168,6 +169,7 @@ export default {
     DeleteMixin,
     getData, 
     permissions, 
+    headerBuilder
     // DeleteMixin
   ],
 
@@ -200,7 +202,7 @@ export default {
 
       showDelete: false,
 
-      tableViewTemplate: ''
+      tableViewTemplate: '',
 
     };
   },
@@ -228,22 +230,12 @@ export default {
       return typeof this.$scopedSlots[name] !== 'undefined'
     },
 
-    changeHeader(currHeader, show) {
-      const index = this.headers.findIndex(header => header.key === currHeader.key)
-      const newHeaders = Object.assign([], this.headers) 
-      newHeaders[index].show = show === 'hide' ? false : true
-      this.headers = newHeaders
-      console.log(this.headers);
-    },
-
-
-
   },
 
   computed: {
     rowBuilder(){
       return{
-        fields: this.headers,
+        fields: this.showHeaders,
 
         perPage: this.perPage,
         currentPage: this.currentPage,
@@ -253,7 +245,8 @@ export default {
 
         tbodyTransitionProps: this.transProps 
       }
-    }
+    },
+
   }
   
 };

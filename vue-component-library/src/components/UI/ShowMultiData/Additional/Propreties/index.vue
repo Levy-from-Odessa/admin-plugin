@@ -9,17 +9,15 @@
             mx-2
             badge
             bg-dark
-            m-1
+            ml-3
+						mb-3
       `"
 			role="button"
-			@click="$emit('change-header', header, 'hide')"
+			@click="$emit('change-header', header)"
 		>
 			{{header.label}}
 			<i class="fa fa-times"></i>
 		</span>
-
-
-		{{headerSelect}}
 
 		<SingleSelect
 			:value="headerSelect"
@@ -72,7 +70,7 @@ export default {
 		},
 		addHeader(header){
 			this.headerSelect = null
-			this.$emit('change-header', header, 'show')
+			this.$emit('change-header', header)
 		}
 	}
 		

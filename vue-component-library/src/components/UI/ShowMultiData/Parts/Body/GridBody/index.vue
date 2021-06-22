@@ -10,8 +10,7 @@
         table-borderless 
         align-middle
       "
-      responsive="sm"
-      
+      responsive
       v-bind="rowBuilder"
 
       :items="itemProvider"

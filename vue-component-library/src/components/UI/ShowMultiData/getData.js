@@ -29,6 +29,10 @@ export default {
         }
       ]
     },
+    defaultHeaders:{
+      type: Array,
+      default: () => []
+    },
     /*
     [...{text: str, value: str}]
      */

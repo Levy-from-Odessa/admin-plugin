@@ -29,7 +29,7 @@ export default {
             default: 10
         },
         currentPage:{
-            type: Number,
+            type: [Number, String],
             default: 1
         }
     },
