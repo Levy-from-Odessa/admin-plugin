@@ -13,7 +13,7 @@
 						mb-3
       `"
 			role="button"
-			@click="$emit('change-header', header)"
+			@click="$emit('change-header', [header])"
 		>
 			{{header.label}}
 			<i class="fa fa-times"></i>
@@ -70,7 +70,7 @@ export default {
 		},
 		addHeader(header){
 			this.headerSelect = null
-			this.$emit('change-header', header)
+			header && this.$emit('change-header', [header])
 		}
 	}
 		

@@ -81,7 +81,9 @@ export default {
         return {
             defaultStoreActions: {
                 fetchData: 'fetchAll',
-                getData: 'allIdsData'
+                getData: 'allIdsData',
+                getTotalItems: 'allIdsTotalItems',
+                getHeaders: 'allIdsHeaders',
             },
 
             dataTable: [],
@@ -96,14 +98,16 @@ export default {
         if (this.copyStore.actions) {
           const { actions: { fetchData, propsData } } = this.copyStore
           const payload = { ...this.routeQuery, ...query, ...propsData } 
-          console.log(payload);
           
           this.query = payload
-
-
-
+          
+          
+          
           this.putUrlQuery(payload)
-
+          
+          console.log(payload);
+          console.log(`${this.store.name}/${fetchData}(${payload})`);
+          
           this.$store.dispatch(`${this.store.name}/${fetchData}`, 
             payload 
           )
@@ -165,8 +169,13 @@ export default {
           return this.$store.getters[`${this.store.name}/${getData}`] 
         },
         totalItems(){
-          return this.$store.getters[`${this.store.name}/totalItems`] 
+          const { actions: { getTotalItems } } = this.copyStore
+          return this.$store.getters[`${this.store.name}/${getTotalItems}`] 
         },
+        // allHeaders(){
+        //   const { actions: { getHeaders } } = this.copyStore
+        //   return this.$store.getters[`${this.store.name}/${getHeaders}`] 
+        // },
         currentPage(){
           return this.$store.getters[`${this.store.name}/pageNumber`] 
         },

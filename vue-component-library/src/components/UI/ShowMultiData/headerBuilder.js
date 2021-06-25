@@ -1,57 +1,25 @@
 export default {
-	computed:{
-		showMultiDataHeaders(){
-			return this.$store.getters[`${this.store.name}/headers`] 
-		},
-    showHeaders(){
-      return this.showMultiDataHeaders 
-				&& this.showMultiDataHeaders.filter(header => header.show)
-    },
+	data() {
+		return {
+			allHeaders: []
+		}
 	},
+
 	methods: {
-		initialHeaders(payload){
-			this.$store.dispatch(`${this.store.name}/initializeHeaders`, 
-				payload 
-			)
-		},
     changeHeaderVisible(payload) {
 			if (!payload) {
 				return
       }
-			this.$store.dispatch(`${this.store.name}/changeHeaderVisible`, 
-				payload 
-			)
+
+			const newHeaders = Object.assign([], this.allHeaders) 
+			payload.forEach((header ) => {
+				const index = newHeaders.findIndex(item => item.key === header.key)
+				newHeaders[index].show = !newHeaders[index].show
+			})
+
+			this.allHeaders = newHeaders
 
     },
-    setMultiDataHeaders(){
-			const allHeaders = []
-      const exampleRow = this.dataTable[0]
-			const actionHeader = {key: 'actions', label: 'actions', show: true}
-			const defaultHeaders = {} 
-
-			this.headers.forEach(header => {
-				const label = this.$t(this.convertToSentenceCase(header.label))
-				defaultHeaders[header.key] = {
-					...header,
-					label,
-					show: true
-				}
-			})
-      Object.keys(exampleRow).forEach(headerKey => {
-					let flagShow = false
-
-					if(headerKey.includes('@')) { return }
-
-					const headerItem = {
-						label: this.$t(this.convertToSentenceCase(headerKey)),
-						key:  headerKey,
-						show: flagShow
-					}
-					allHeaders.push(defaultHeaders[headerKey] || headerItem)
-      })
-			allHeaders.push(actionHeader)
-			this.initialHeaders(allHeaders)
-		},
 		convertToSentenceCase(str){
 			if (!str) {
 				return
@@ -61,7 +29,47 @@ export default {
 			return final
 		}
 	},
-	mounted(){
-		this.setMultiDataHeaders()
+	
+	computed: {
+    showHeaders(){
+      return this.allHeaders 
+				&& this.allHeaders.filter(header => header.show)
+    },
+	},
+	
+	watch:{
+		dataTable(dataTable){
+			const isExistAllHeaders = this.allHeaders.length > 0
+			if (dataTable && !isExistAllHeaders) {
+					const allHeaders = []
+					const exampleRow = dataTable[0]
+					const actionHeader = {key: 'actions', label: 'actions', show: true}
+					const defaultHeaders = {} 
+					if (exampleRow) {
+						this.headers.forEach(header => {
+							const label = this.$t(this.convertToSentenceCase(header.label))
+							defaultHeaders[header.key] = {
+								...header,
+								label,
+								show: true
+							}
+						})
+						Object.keys(exampleRow).forEach(headerKey => {
+								let flagShow = false
+
+								if(headerKey.includes('@')) { return }
+
+								const headerItem = {
+									label: this.$t(this.convertToSentenceCase(headerKey)),
+									key:  headerKey,
+									show: flagShow
+								}
+								allHeaders.push(defaultHeaders[headerKey] || headerItem)
+						})
+						allHeaders.push(actionHeader)
+						this.allHeaders = allHeaders
+					}
+			}
+		}
 	}
 }

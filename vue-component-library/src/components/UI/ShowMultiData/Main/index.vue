@@ -36,7 +36,7 @@
               </template>
               <template #propreties> 
                 <Propreties 
-                  :headers="showMultiDataHeaders"
+                  :headers="allHeaders"
                   @change-header="changeHeaderVisible"
                 />
               </template>
@@ -51,7 +51,7 @@
             <TableLoader 
                 :isMainLoading="isMainLoading"
                 :dataTableLength="dataTable && dataTable.length"
-                :headersLength="showMultiDataHeaders.length"
+                :headersLength="headers.length"
             />
 
           <template v-if="dataTable && dataTable.length !== 0">
@@ -75,7 +75,7 @@
               <!-- Cols -->
                 <template 
                     #[gomycell(header.key)]="{item}" 
-                    v-for="header in showMultiDataHeaders"
+                    v-for="header in headers"
                 >
                     <slot
                       :name="header.key"
