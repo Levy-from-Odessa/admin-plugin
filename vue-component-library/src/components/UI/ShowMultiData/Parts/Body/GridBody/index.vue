@@ -1,5 +1,4 @@
 <template>
-<div class="">
     <b-table
       hover
       ref="table"
@@ -9,6 +8,7 @@
         table-centered 
         table-borderless 
         align-middle
+        overflow-visible
       "
       responsive
       v-bind="rowBuilder"
@@ -65,7 +65,6 @@
         </template>
     
     </b-table>
-</div>
 </template>
 
 <script>

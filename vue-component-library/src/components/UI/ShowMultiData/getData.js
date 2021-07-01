@@ -72,6 +72,10 @@ export default {
       type: Boolean,
       default: () => false
     },
+    permissionName: {
+      type: String,
+      default: () => ''
+    },
     searchSchema:{
       type: Object,
       default: () => {}

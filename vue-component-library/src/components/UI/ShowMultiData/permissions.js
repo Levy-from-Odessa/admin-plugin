@@ -22,7 +22,11 @@ export default{
     
     userRoles () {
       const profile = this.$store.getters['auth/profile']
-      const nameOfGroupRole = pluralize(this.store.name.toUpperCase(), 1)
+      const nameOfGroupRole = 
+            this.permissionName 
+          || pluralize(this.store.name.toUpperCase(), 1)
+
+          console.log(profile.roles);
       return profile && profile.roles && profile.roles[nameOfGroupRole]
     },
 

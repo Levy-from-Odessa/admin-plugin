@@ -55,7 +55,6 @@
             />
 
           <template v-if="dataTable && dataTable.length !== 0">
-            <div class="mb-0 ">
             <!-- Grid Body -->
             <transition name="template-view">
               <TableGridBody 
@@ -118,7 +117,6 @@
                     :current-page="currentPage"
                     @setCurrentPage="setCurrentPage"
                 />
-            </div>
           </template>
         </div>
       <ModalDelete 
