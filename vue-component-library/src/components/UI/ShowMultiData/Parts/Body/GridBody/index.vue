@@ -47,7 +47,15 @@
 
                 @toggleDetails="cusToggleDetails(row)"
 
-              /> 
+              >
+                <template #dropdown-action>
+                  <slot 
+                    name="dropdown-action"
+                    :item="row.item"  
+                  />
+                </template>
+
+              </TableActions> 
 
               <slot 
                 name="actions"

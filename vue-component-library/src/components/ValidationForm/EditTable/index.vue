@@ -42,9 +42,10 @@
                                 <td 
                                   v-else
                                   :key="header.key + '-' +  item.name"
+                                  class="w-10"
                                 >
                                   <div class="td-content">
-                                    <h6>  {{item[header.key] }}</h6>
+                                    <h6>  {{item[header.key] }}:</h6>
                                   </div>
                                 </td>
                               <!-- FLEX TD -->
@@ -54,13 +55,16 @@
 
                                 <!-- 
                                   VALUE TD
-                                    always item.value, can be soloform by schema
+                                    always item.value
                                     slot - value-{{item.name}}
                                     default - {{ item[header.key] | dynamic(item.fieldType)  }}
                                  -->
-                                <td :key="header.key + '-' + item.name ">
+                                <td 
+                                  :key="header.key + '-' + item.name "
+                                  class="w-50"
+                                >
                                   <div class="td-content">
-                                    <template v-if="!item.editMode">
+                                    <template v-if="!item.editMode && !item.directEdit">
                                       <template 
                                         v-if="slotExist(header.key + '-' + item.name)"
                                       >
@@ -73,13 +77,31 @@
                                           {{ item[header.key] | dynamic(item.fieldType)   }}
                                       </template>
                                     </template>
-                                    <SoloForm
-                                        v-else
-                                        :ref="`${item.name}Form`"
-                                        v-model="item.value"
-                                        :schema="item.schema"
-                                        @submit-form="closeEditMode(item.name)"
-                                    />
+                                    <!-- 
+                                      EDIT TD
+                                        always  soloform by schema
+                                        slot - value-form-{{item.name}}
+                                        default - <SoloForm/>
+                                    -->
+                                    <template v-else>
+                                      <template 
+                                        v-if="slotExist(header.key + '-form' + '-' + item.name)"
+                                      >
+                                        <slot 
+                                          :name="header.key + '-form' + '-' + item.name" 
+                                          :item="item" 
+                                        />
+                                          <!-- :submit-form="closeEditMode(item.name)" -->
+                                      </template>
+                                      <template v-else>
+                                        <SoloForm
+                                            :ref="`${item.name}Form`"
+                                            v-model="item.value"
+                                            :schema="item.schema"
+                                            @submit-form="closeEditMode(item.name)"
+                                        />
+                                      </template>
+                                    </template>
                                   </div>
                                 </td>
                                 <!-- VALUE TD -->
@@ -165,9 +187,11 @@
           padding: 0 !important;
           .td-content{
             padding: 5px;
-            height: 50px;
+            min-height: 50px;
             h6{
-              color: rgba(8, 8, 109, 0.76);
+              font-size: 15px;
+              font-weight: 800;
+              color: rgba(4, 4, 90, 0.76);
             }
           }
         }

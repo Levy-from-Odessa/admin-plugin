@@ -9,7 +9,7 @@ import Actions from './Parts/Actions'
 // generated
 // import Field from './Parts/Field'
 // FORM
-import SoloForm from '@/components/ValidationForm/SoloForm'
+import SoloForm from '../SoloForm'
 export default {
   name: 'FtthValEditTable',
   mixins: [
@@ -54,6 +54,7 @@ export default {
       })
     },
     closeEditMode (itemName) {
+      
       const currentItem = this.editItems.find(item => (item.name === itemName))
       if (currentItem.table) {
         this.editItems.forEach((item) => {
@@ -62,15 +63,23 @@ export default {
           }
         })
       } else {
-        const createForm = this.$refs[`${itemName}Form`][0]
+        const allRefs = Object.keys(this.$refs)
+        const isFormExist = (allRefs.findIndex(ref => ref === itemName + 'Form')) !== -1
+        const currItem = this.editItems.find(item => item.name === itemName)
+        
+        if (!isFormExist) {
+          currItem.editMode = false
+          return
+        } 
+          
+        const createForm = this.$refs[`${itemName}Form`][0] || ''
+
         createForm.$v.form.$touch()
+
+
         if (!createForm.$v.$invalid) {
-          this.editItems.forEach((item) => {
-            if (item.name === itemName ) {
-              item.editMode = false
-              this.$emit('itemUpdated', item, this.editItems) // watch every update
-            }
-          })
+          currItem.editMode = false
+          this.$emit('itemUpdated', currItem, this.editItems) // watch every update
         } else {
           alert(('Check the form'), createForm.errorMessages)
         }

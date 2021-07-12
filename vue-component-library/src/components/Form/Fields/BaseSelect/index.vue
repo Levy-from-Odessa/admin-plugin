@@ -18,11 +18,11 @@
       <b-form-select-option
         class="option"
         v-for="item in options"
-        :key="item[showValue]"
+        :key="item[showValue] ||item"
         :value="item"
-        @click="$emit('input', item[showValue])"
+        @click="$emit('input', item[showValue] || item)"
       >
-        {{ item[showLabel] }}
+        {{ item[showLabel] || item}}
       </b-form-select-option>
     </b-form-select>
   </b-form-group>

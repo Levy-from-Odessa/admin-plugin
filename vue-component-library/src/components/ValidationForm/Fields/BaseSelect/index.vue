@@ -1,7 +1,10 @@
 <template>
-  <b-form-group
-    :label="label"
+  <div
+    class="input"
   >
+    <label v-if="label" class="mb-1 mt-3">
+      {{label}}
+    </label>
     <b-form-input 
       class="form-control"
       style="width: 100%"
@@ -21,10 +24,10 @@
         :key="item[showValue]"
         :value="item[showLabel]"
       >
-          {{ item[showLabel] }}
+          {{ item[showLabel] || item  }}
         </option>
     </datalist>
-  </b-form-group>
+  </div>
 </template>
 
 <script>

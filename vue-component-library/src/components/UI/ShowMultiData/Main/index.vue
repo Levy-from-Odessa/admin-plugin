@@ -91,6 +91,16 @@
                     :item="item"  
                   />
                 </template>
+
+                <template 
+                  v-if="slotExist('dropdown-action')"
+                  #dropdown-action="{item}"
+                >
+                  <slot 
+                    name="dropdown-action"
+                    :item="item"  
+                  />
+                </template>
               </TableGridBody>
             </transition>
 
@@ -144,7 +154,7 @@ import TableLoader from '../Parts/Loader'
 
 // DELETE
 import DeleteMixin from '@/mixins/Notifications/DeleteMixin'
-import ModalDelete from '@/components/UI/Modal/Delete'
+import ModalDelete from '../..//Modal/Delete'
 
 // Additional
 import Search from '../Additional/Search'
@@ -199,6 +209,7 @@ export default {
       filter: '',
 
       showDelete: false,
+      showDeleteModal: false,
 
       tableViewTemplate: '',
 

@@ -35,8 +35,13 @@
           <i class="bx bx-trash font-size-16 align-middle me-1"></i>
             Delete
         </a>
-       </b-dropdown-item
-      >
+       </b-dropdown-item>
+
+
+
+        <slot 
+          name="dropdown-action"
+        />
     </b-dropdown>
     
 

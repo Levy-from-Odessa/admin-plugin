@@ -21,6 +21,7 @@
 import { validationMixin } from 'vuelidate'
 import BaseInput from '../Fields/BaseInput'
 import BaseSelect from '../Fields/BaseSelect'
+import BaseSelectTag from '../Fields/BaseSelectTag'
 import validationRules from '../../../utils/ValidationRules'
 
 export default {
@@ -28,6 +29,7 @@ export default {
   components: {
     BaseInput,
     BaseSelect,
+    BaseSelectTag,
   },
   mixins: [validationMixin],
   props: {

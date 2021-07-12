@@ -29,7 +29,7 @@ export default {
         setSelectSchema(schemaName, itemProp) {
             let value = itemProp.value
             let directEdit = false
-            if (schemaName === 'BaseSelect') {
+            if (schemaName === 'BaseSelect' || schemaName === 'BaseSelectTag') {
                 directEdit = true
                 if (Array.isArray(itemProp.value) && itemProp.value.length > 0) {
                     value = itemProp.value.map(objVal => {
@@ -83,16 +83,21 @@ export default {
                 if (itemProp.allowEdit && itemProp.show) {
                     itemProp.schema = this.editSchemas[`${name}Schema`]
                     itemProp.directEdit = false
+                    const schemaName = itemProp.schema.component
+                    if (schemaName === 'BaseSelect' || schemaName === 'BaseSelectTag') {
+                        itemProp.directEdit = true
+                    }
                 }
 
                 // select schema
-                if (itemProp.schema) {
-                    const schemaName = itemProp.schema.component
-                    const {value, directEdit} = this.setSelectSchema(schemaName, itemProp)
+                // allow convert value to [showLabel] format (from ?vuetify?)
+                // if (itemProp.schema) {
+                //     const schemaName = itemProp.schema.component
+                //     const {value, directEdit} = this.setSelectSchema(schemaName, itemProp)
 
-                    itemProp.value = value
-                    itemProp.directEdit = directEdit
-                }
+                //     itemProp.value = value
+                //     itemProp.directEdit = directEdit
+                // }
 
                 // show
                 if (itemProp.show) {

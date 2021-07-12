@@ -102,12 +102,15 @@ export default {
         if (this.copyStore.actions) {
           const { actions: { fetchData, propsData } } = this.copyStore
           const payload = { ...this.routeQuery, ...query, ...propsData } 
+          console.log(this.routeQuery, 'route');
+          console.log(this.query, 'query');
+          console.log(this.propsData, 'props');
           
           this.query = payload
           
           
           
-          this.putUrlQuery(payload)
+          this.putUrlQuery(propsData)
           
           console.log(payload);
           console.log(`${this.store.name}/${fetchData}(${payload})`);
@@ -118,9 +121,15 @@ export default {
           }
       },
       putUrlQuery(payload){
+        console.log(payload);
         const query = payload 
-        const name = this.$route.name
-        this.$router.replace({ name ,query }).catch(()=>{})
+        // const name = this.$route.name
+        // const tableQuery = Object.keys(query).map(queryKey => {
+        //   return `${queryKey}: ${query[queryKey]}`
+        // })
+        // const subQuery = this.store.name + '?' + tableQuery.join('&')
+        // this.$router.replace({ name ,query  }).catch(()=>{})
+        this.$router.replace({name, query }).catch(()=>{})
       }
     },
     mounted () {

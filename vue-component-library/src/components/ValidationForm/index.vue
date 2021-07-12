@@ -1,38 +1,38 @@
 <template>
-  <form>
-      <div class="row">
-        <div class="cols-12 sm-12 md-12">
-          <component
-            :is="field.component"
-            v-for="(field, key) in schema"
-            :key="field.label"
-            :name="field.label"
-            :label="field.label"
-            v-bind="{...field}"
-            :show-label="field.showLabel"
-            :show-value="field.showValue || key"
-            :disabled="field.disabled"
-            :type="field.type"
+    <div class="d-flex flex-wrap">
+      <div 
+          :class="horizontal ? 'horizontal' : 'vertical'"
+          v-for="(field, key) in schema"
+          :key="field.label"
+        >
+        <component
+          :is="field.component"
+          :name="field.label"
+          :label="field.label"
+          v-bind="{...field}"
+          :show-label="field.showLabel"
+          :show-value="field.showValue || key"
+          :disabled="field.disabled"
+          :type="field.type"
 
-            :error="errorMessages[key]"
-            :has-error="$v.form[key].$error"
+          :error="errorMessages[key]"
+          :has-error="$v.form[key].$error"
 
-            :value="value[key]"
+          :value="value[key]"
 
 
-            @input="update(key, $event, field.component, field)"
-            @blur="checkInput(key)"
-            @submit-form="submit(key)"
-          />
-        </div>
+          @input="update(key, $event, field.component, field)"
+          @blur="checkInput(key)"
+          @submit-form="submit(key)"
+        />
       </div>
-  </form>
+    </div>
 </template>
 
 <script>
 import { validationMixin } from 'vuelidate'
 import BaseInput from './Fields/BaseInput'
-// import BaseSelect from './Fields/BaseSelect'
+import BaseSelect from './Fields/BaseSelect'
 // import DatePicker from './Fields/DatePicker'
 
 // import CreateTable from './CreateTable/index'
@@ -41,13 +41,17 @@ export default {
   name: 'FtthValForm',
   components: {
     BaseInput,
-    // BaseSelect,
+    BaseSelect,
     // DatePicker,
 
     // CreateTable
   },
   mixins: [validationMixin],
   props: {
+    horizontal: {
+      type:Boolean,
+      default: () => false
+    },
     schema: {
       type: Object,
       required: true
@@ -120,11 +124,15 @@ export default {
       if (component === 'BaseSelect') {
         this.$v.form[key].$touch()
       }
+      if (field.type === 'number') {
+        value = parseInt(value)
+      }
 
       this.value[key] = value
       this.form[key] = value
 
       this.$emit('input', {...this.value})
+      this.$emit('check-input', {value, key, field})
     },
     // doesnt allow to handle if it error
     checkInput () {
@@ -145,3 +153,12 @@ export default {
   }
 }
 </script>
+<style scoped>
+.vertical{
+  width: 100%;
+}
+.horizontal{
+  margin:0 5px;
+  width: 20%;
+}
+</style>

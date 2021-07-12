@@ -1,61 +1,48 @@
 
 <template>
-  <div class="card">
-
-    <div class="row">
-      <div class="col-12">
-        <div class="card">
-          <div class="card-body">
-            <h4 class="card-title mb-4">Licenses</h4>
-            <form class="repeater" enctype="multipart/form-data">
-              <div>
-                <div
-                  v-for="(field, index) in fields"
-                  :key="field.id"
-                  class="row"
-                >
-                  <div class="mb-3 col-lg-2">
-                    <label for="name">Name</label>
-                    <input
-                      id="name"
-                      v-model="field.name"
-                      type="text"
-                      name="untyped-input"
-                      class="form-control"
-                    />
-                  </div>
-
-
-
-                  <div class="col-lg-2 align-self-center">
-                    <div class="d-grid">
-                      <input
-                        type="button"
-                        class="btn btn-primary btn-block"
-                        value="Delete"
-                        @click="deleteRow(index)"
-                      />
-                    </div>
-                  </div>
-                </div>
-              </div>
+    <div class="card">
+        <div class="card-body">
+          <div
+            v-for="(field ) in fields"
+            :key="field.id"
+            class="row justify-content-center" 
+          >
+            <div class="mb-4 col-lg-2">
+              <label for="name">Name</label>
               <input
-                type="button"
-                class="btn btn-success mt-3 mt-lg-0"
-                value="Add"
-                @click="AddformData"
+                v-model="field.name"
+                type="text"
+                name="untyped-input"
+                class="form-control"
               />
-            </form>
-          </div>
-          <!-- end card-body -->
-        </div>
-        <!-- end card -->
-      </div>
-      <!-- end col -->
-    </div>
-    <!-- end row -->
+            </div>
+            <div class="mb-4 col-lg-2">
+              <label for="name">Name</label>
+              <input
+                v-model="field.name"
+                type="text"
+                name="untyped-input"
+                class="form-control"
+              />
+            </div>
 
-  </div>
+
+
+            <div class="col-lg-2 align-self-center">
+              <div class="d-grid">
+                <input
+                  type="button"
+                  class="btn btn-success mt-3 mt-lg-0"
+                  value="Add"
+                  @click="AddformData"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- end card-body -->
+      </div>
+      <!-- end card -->
 </template>
 
 
