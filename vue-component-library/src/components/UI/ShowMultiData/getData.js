@@ -185,10 +185,6 @@ export default {
           const { actions: { getTotalItems } } = this.copyStore
           return this.$store.getters[`${this.store.name}/${getTotalItems}`] 
         },
-        // allHeaders(){
-        //   const { actions: { getHeaders } } = this.copyStore
-        //   return this.$store.getters[`${this.store.name}/${getHeaders}`] 
-        // },
         currentPage(){
           return this.$store.getters[`${this.store.name}/pageNumber`] 
         },

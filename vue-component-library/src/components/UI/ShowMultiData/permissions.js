@@ -2,7 +2,6 @@
 import pluralize from 'pluralize'
 export default{
   computed:{
-    
     translatedHeaders () {
       return this.headers.map((field) => {
         return { ...field, text: this.$t(field.text) }
