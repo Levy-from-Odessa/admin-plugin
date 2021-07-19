@@ -20,8 +20,6 @@
 		</span>
 
 
-    {{valueBuffer}}
-
 		<SingleSelect
 			:value="valueBuffer"
 			:options="filtredOptions"

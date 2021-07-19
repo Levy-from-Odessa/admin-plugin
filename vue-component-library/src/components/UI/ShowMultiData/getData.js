@@ -129,7 +129,7 @@ export default {
         // })
         // const subQuery = this.store.name + '?' + tableQuery.join('&')
         // this.$router.replace({ name ,query  }).catch(()=>{})
-        this.$router.replace({name, query }).catch(()=>{})
+        this.$router.replace({name, query}).catch(()=>{})
       }
     },
     mounted () {

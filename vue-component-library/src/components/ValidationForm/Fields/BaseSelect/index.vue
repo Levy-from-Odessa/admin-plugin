@@ -5,34 +5,24 @@
     <label v-if="label" class="mb-1 mt-3">
       {{label}}
     </label>
-    <b-form-input 
-      class="form-control"
-      style="width: 100%"
-      list="input-list" 
-      id="input-with-list"
-      @input="input"
-    />
-    <datalist id="input-list">
-      <option
-        :value="null"
-      >
-        All
-      </option>
-      <option 
-        class="option"
-        v-for="item in options"
-        :key="item[showValue]"
-        :value="item[showLabel]"
-      >
-          {{ item[showLabel] || item  }}
-        </option>
-    </datalist>
+		<SingleSelect
+			:value="valueBuffer"
+			:options="options"
+			:option-label="showLabel || null"
+			@input="input"
+		/>
+			<!-- :option-key="showValue" -->
   </div>
 </template>
 
 <script>
 export default {
   name: 'FtthValBaseSelect',
+  data() {
+    return {
+      valueBuffer: ''
+    }
+  },
   props: {
     label: {
       type: String,
@@ -57,12 +47,23 @@ export default {
   },
   methods: {
     input(valueLabel){
-      console.log(valueLabel);
-      const item = this.options.find(option => {
-        return option[this.showLabel] === valueLabel
+      if (!valueLabel) {
+        return;
+      }
+      const option = this.options.find(option => {
+        return option[this.showLabel] === valueLabel|| 
+        option === valueLabel
       })
-      item 
-        ? this.$emit('input',  item)
+
+
+
+      const valueOfOption = option[this.showValue] || option 
+
+      console.log(valueOfOption);
+
+
+      option 
+        ? this.$emit('input', valueOfOption )
         : this.$emit('start-input',  valueLabel);
     }
   },

@@ -1,9 +1,10 @@
 <template>
   <b-form-group
     class="mb-3"
-    label-cols-lg="4"
+    label-cols-lg="10"
     :label="label"
   >
+
     <div class=""
         v-for="status in options"
         :key="status[showLabel]"
