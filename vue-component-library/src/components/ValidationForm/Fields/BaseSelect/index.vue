@@ -5,19 +5,24 @@
     <label v-if="label" class="mb-1 mt-3">
       {{label}}
     </label>
-		<SingleSelect
+		<AutoComplete
 			:value="valueBuffer"
 			:options="options"
 			:option-label="showLabel || null"
 			@input="input"
+			@search="search"
 		/>
 			<!-- :option-key="showValue" -->
   </div>
 </template>
 
 <script>
+import AutoComplete from './AutoComplete'
 export default {
   name: 'FtthValBaseSelect',
+  components:{
+    AutoComplete
+  },
   data() {
     return {
       valueBuffer: ''
@@ -46,8 +51,12 @@ export default {
     }
   },
   methods: {
+    search(val){
+      this.$emit('search', val)
+    },
     input(valueLabel){
       if (!valueLabel) {
+      
         return;
       }
       const option = this.options.find(option => {
@@ -66,7 +75,7 @@ export default {
         ? this.$emit('input', valueOfOption )
         : this.$emit('start-input',  valueLabel);
     }
-  },
+  }
 }
 </script>
 

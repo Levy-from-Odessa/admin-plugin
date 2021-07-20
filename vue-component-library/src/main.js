@@ -18,6 +18,11 @@ const ComponentLibrary = {
       }
       Vue.component(component.name, component)
     }
+    // Vue.component('Test',
+    // {
+    //   template: '<div class="my-component"><span>Hello</span>, <p class="this-too">world!</p></div>',
+    //   style:    'span, .this-too{ font-color: red }'
+    // });
 
 
     // mixins

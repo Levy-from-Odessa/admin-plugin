@@ -24,6 +24,7 @@
           @input="update(key, $event, field.component, field)"
           @blur="checkInput(key)"
           @submit-form="submit(key)"
+          @search="$emit('search', {key, value: $event})"
         />
       </div>
     </div>
