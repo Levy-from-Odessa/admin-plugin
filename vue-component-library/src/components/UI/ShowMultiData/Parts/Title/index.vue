@@ -12,7 +12,7 @@
 
             <div class="col-3 ">
                  <b-button-group>
-                    <slot name="button"/>
+                    <slot name="button" :query="query"/>
                     <button
                         v-if="topTable.create"
                         class="btn btn-success "

@@ -11,9 +11,10 @@
     :type="schema.type"
     :error="errorMessages"
     :has-error="$v.form.$error"
-    @input="update( $event)"
+    @input="update(schema.label, $event,schema.component, schema)"
     @blur="checkInput()"
     @submit-form="$emit('submit-form')"
+    @search="$emit('search')"
   />
 </template>
 
@@ -43,9 +44,7 @@ export default {
     }
   },
   data () {
-    return {
-      form: {},
-      blur: false
+    return { form: {}, blur: false
     }
   },
   computed: {
@@ -85,12 +84,16 @@ export default {
         }
       }
     },
-    update (value) {
+    update (key, value, component, field) {
       this.form = value
       if (this.schema.component === 'BaseSelect') {
         this.$v.form.$touch()
       }
       this.checkInput()
+      if (field.type === 'number') {
+        console.log('number');
+        value = parseInt(value)
+      }
       this.$emit('input', value)
     },
     // doesnt allow to handle if it error

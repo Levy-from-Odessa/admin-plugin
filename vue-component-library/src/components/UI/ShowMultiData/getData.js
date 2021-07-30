@@ -94,16 +94,23 @@ export default {
             filteredData: [], // copy of dataTable, but can be filtered 
 
 
-            query: {}
+            query: {},
+            order: {}
         }
     },
     methods: {
       fetch (query = {}) {
         if (this.copyStore.actions) {
           const { actions: { fetchData, propsData } } = this.copyStore
-          const payload = { ...this.routeQuery, ...query, ...propsData } 
+          const payload = { 
+            ...this.routeQuery, 
+            ...query, 
+            ...propsData,
+            ...this.order
+          } 
           console.log(this.routeQuery, 'route');
           console.log(this.query, 'query');
+          console.log(this.order, 'order');
           console.log(this.propsData, 'props');
           
           this.query = payload
@@ -119,6 +126,25 @@ export default {
             payload 
           )
           }
+      },
+      onHeaderClicked(orderName) {
+        // toggle order
+        const direction = this.order[`order[${orderName}]`] === 'ASC'
+          ? 'DESC'
+          : 'ASC';
+
+        // leave only one order
+        Object.keys(this.query).forEach((queryItem) => {
+          if (queryItem.includes('order') && queryItem !== orderName) {
+            delete this.query[queryItem];
+          }
+        });
+
+        this.order = { 
+          [`order[${orderName}]`]: direction 
+        };
+
+        this.fetch();
       },
       putUrlQuery(payload){
         console.log(payload);
@@ -148,7 +174,7 @@ export default {
         }
       },
       dataTable(){
-        this.$refs.table && this.$refs.table.refresh()
+        // this.$refs.gridBody.refresh()
       },
       filter(filter){
         const filteredData = this.dataTable.filter(data => {

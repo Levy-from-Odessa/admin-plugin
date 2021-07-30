@@ -20,12 +20,14 @@ export default{
     
     
     userRoles () {
-      const profile = this.$store.getters['auth/profile']
-      const nameOfGroupRole = 
-            this.permissionName.toUpperCase()
-          || pluralize(this.store.name.toUpperCase(), 1)
+      // by default perm name = store name
+      const storeNamePermission = pluralize(this.store.name.toUpperCase(), 1)
+      // if recived another perm
+      const permissionName = this.permissionName.toUpperCase()
 
-          console.log(profile.roles, nameOfGroupRole);
+      const profile = this.$store.getters['auth/profile']
+      const nameOfGroupRole = permissionName || storeNamePermission
+
       return profile && profile.roles && profile.roles[nameOfGroupRole]
     },
 

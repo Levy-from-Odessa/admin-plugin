@@ -18,9 +18,10 @@
                 @setFilter="filter = $event"
                 @toggleTemplate="tableViewTemplate = $event"
             >
-              <template #button>
+              <template #button="{query}">
                 <slot
                   name="title-button"
+                  :query="query"
                 />
               </template>
               <template #search>
@@ -58,6 +59,7 @@
             <!-- Grid Body -->
             <transition name="template-view">
               <TableGridBody 
+                ref="gridBody"
                 v-if="tableViewTemplate === 'grid'"
                 v-model="currentItems"
                 :items="filteredData"
@@ -67,9 +69,11 @@
                   view: tableView,
                   details: actions.details
                 }"
+                :order="order"
                 @filtered="onFiltered"
                 @delete="setDeleteItem($event.id)" 
                 @view="$emit('view', $event)"
+                @onHeaderClicked="onHeaderClicked"
               >
               <!-- Cols -->
                 <template 

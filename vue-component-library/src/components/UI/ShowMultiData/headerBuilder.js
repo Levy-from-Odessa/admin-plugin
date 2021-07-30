@@ -18,6 +18,7 @@ export default {
 			})
 
 			this.allHeaders = newHeaders
+			// this.$refs.gridBody.refresh()
 
     },
 		convertToSentenceCase(str){

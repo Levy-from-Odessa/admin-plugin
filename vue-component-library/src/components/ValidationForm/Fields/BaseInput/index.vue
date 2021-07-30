@@ -17,8 +17,7 @@
         }"
         autocomplete="off"
         class="form-control"
-        :class="{
-          'error': hasError,
+        :class="{ 'error': hasError,
           'is-invalid': hasError,
         }"
 

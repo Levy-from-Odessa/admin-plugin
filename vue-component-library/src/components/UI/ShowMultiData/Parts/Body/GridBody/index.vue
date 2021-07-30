@@ -21,26 +21,31 @@
 
       @filtered="$emit('filtered', $event)"
     >
+            <!-- #[gomycell(header)]="{item}"  -->
+          <!-- <slot
+            :name="header.key"
+            :item="item"
+          /> -->
 
         <template 
             v-for="header in rowBuilder.fields"
-            #[gomycell(header)]="{item}" 
+            #[gomyhead(header)] 
         >
-            <slot
-              :name="header.key"
-              :item="item"
-            />
-        </template>
+          <TableHeaderItem
+            :key="header.key"
+            :header="header"
+            :query="order"
 
+            @setOrder="$emit('onHeaderClicked', $event)"
+          />
+        </template>
 
 
         <template #cell(actions)="row">
           <b-button-group>
-
               <TableActions 
                 class="mx-3"
                 :actions="actions" 
-
 
                 @delete="$emit('delete', row.item)" 
                 @view="$emit('view', row.item)"
@@ -77,10 +82,12 @@
 
 <script>
 import TableActions from '../../Actions'
+import TableHeaderItem from './HeaderItem'
 export default {
   name: 'GridBodyTable',
   components: {
     TableActions,
+    TableHeaderItem
   },
   props:{
     rowBuilder:{
@@ -101,6 +108,10 @@ export default {
       default: () => [],
       required: true
     },
+    order: {
+      type: Object,
+      default: () => {},
+    }
     
   },
   watch: {
@@ -121,9 +132,15 @@ export default {
       return typeof this.$scopedSlots[key] !== 'undefined'
        && `cell(${key})`;
     },
+    gomyhead({ key }) {
+      return `head(${key})`;
+    },
 
     itemProvider (){
       return (this.items || [])
+    },
+    refresh(){
+			this.$refs.table.refresh()
     }
 
   },
