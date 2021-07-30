@@ -6,7 +6,7 @@
       >
         <div 
           class="cols-12 sm-12 md-12 mb-2"
-          :key="field.label"
+          :key="key"
           v-if="field.component !== 'BaseRadio' 
           && field.component !== 'BaseCheckbox'"
         >
@@ -24,8 +24,10 @@
               @input="update(key, $event , field)"
             />
         </div>
-        <div class="col-6 mb-1" v-else
-          :key="field.label"
+        <div 
+          v-else
+          class="col-6 mb-1" 
+          :key="key"
         >
             <component
               :is="field.component"

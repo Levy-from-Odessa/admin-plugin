@@ -79,6 +79,10 @@ export default {
     searchSchema:{
       type: Object,
       default: () => {}
+    },
+    inputQuery:{
+      type: Object,
+      default: () => {}
     }
   },
     data() {
@@ -103,23 +107,19 @@ export default {
         if (this.copyStore.actions) {
           const { actions: { fetchData, propsData } } = this.copyStore
           const payload = { 
-            ...this.routeQuery, 
-            ...query, 
-            ...propsData,
-            ...this.order
+            ...this.routeQuery, // from url
+            ...query, // local
+            ...propsData, // initial filters
+            ...this.order, // asc/desc for each
+            ...this.inputQuery // new filters from parent
           } 
-          console.log(this.routeQuery, 'route');
-          console.log(this.query, 'query');
-          console.log(this.order, 'order');
-          console.log(this.propsData, 'props');
           
           this.query = payload
           
           
           
-          this.putUrlQuery(propsData)
+          this.putUrlQuery(this.query)
           
-          console.log(payload);
           console.log(`${this.store.name}/${fetchData}(${payload})`);
           
           this.$store.dispatch(`${this.store.name}/${fetchData}`, 
@@ -147,15 +147,10 @@ export default {
         this.fetch();
       },
       putUrlQuery(payload){
-        console.log(payload);
         const query = payload 
-        // const name = this.$route.name
-        // const tableQuery = Object.keys(query).map(queryKey => {
-        //   return `${queryKey}: ${query[queryKey]}`
-        // })
-        // const subQuery = this.store.name + '?' + tableQuery.join('&')
-        // this.$router.replace({ name ,query  }).catch(()=>{})
-        this.$router.replace({name, query}).catch(()=>{})
+        const path = this.$route.path
+        console.log(this.$route.path, payload) ;
+        this.$router.replace({path, query}).catch(()=>{})
       }
     },
     mounted () {
@@ -191,6 +186,9 @@ export default {
           return foundFilter
         })
         this.filteredData = filteredData
+      },
+      inputQuery(){
+        this.fetch()
       }
     },
     computed: {

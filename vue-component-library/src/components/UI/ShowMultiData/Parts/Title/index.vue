@@ -6,7 +6,7 @@
             </div>
 
 
-            <div class="col-2">
+            <div class="col-4">
                 <slot name="header"/>
             </div>
 

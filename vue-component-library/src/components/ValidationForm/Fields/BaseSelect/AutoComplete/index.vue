@@ -1,6 +1,9 @@
 <template>
   <div ref="vuesingleselect">
-    <div v-if="!selectedOption" :class="classes.wrapper">
+    <div 
+      v-if="!selectedOption" 
+      :class="classes.wrapper"
+    >
       <div class="relative inline-block w-full">
         <input
           ref="search"
@@ -20,22 +23,11 @@
           v-model="searchText"
         />
 
-        <div
-          @click="toggleDropdown"
-          :class="[classes.icons]"
-          class="cursor-pointer absolute flex items-center"
-        >
-          <svg v-if="!dropdownOpen" aria-hidden="true" viewBox="0 0 448 512">
-            <path
-              d="M207.029 381.476L12.686 187.132c-9.373-9.373-9.373-24.569 0-33.941l22.667-22.667c9.357-9.357 24.522-9.375 33.901-.04L224 284.505l154.745-154.021c9.379-9.335 24.544-9.317 33.901.04l22.667 22.667c9.373 9.373 9.373 24.569 0 33.941L240.971 381.476c-9.373 9.372-24.569 9.372-33.942 0z"
-            />
-          </svg>
-          <svg v-else aria-hidden="true" viewBox="0 0 448 512">
-            <path
-              d="M240.971 130.524l194.343 194.343c9.373 9.373 9.373 24.569 0 33.941l-22.667 22.667c-9.357 9.357-24.522 9.375-33.901.04L224 227.495 69.255 381.516c-9.379 9.335-24.544 9.317-33.901-.04l-22.667-22.667c-9.373-9.373-9.373-24.569 0-33.941L207.03 130.525c9.372-9.373 24.568-9.373 33.941-.001z"
-            />
-          </svg>
-        </div>
+        <IconToggle 
+          :classIcons="classes.icons"
+          :dropdownOpen="dropdownOpen"
+          @click="closeOut"  
+        />
 
         <ul
           tabindex="-1"
@@ -73,23 +65,32 @@
         @input="switchToSearch($event)"
         :value="getOptionDescription(selectedOption)"
       />
-      <input type="hidden" :name="name" ref="selectedValue" :value="getOptionValue(selectedOption)" />
+      <input 
+        type="hidden" 
+        :name="name" 
+        ref="selectedValue" 
+        :value="getOptionValue(selectedOption)" 
+      />
 
-      <div class="flex absolute items-center" :class="classes.icons">
-        <svg aria-hidden="true" @click="closeOut" class="cursor-pointer" viewBox="0 0 512 512">
-          <path
-            d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z"
-          />
-        </svg>
-      </div>
+      <IconTimes 
+        :classIcons="classes.icons"
+        @click="closeOut"  
+      />
+
     </div>
   </div>
 </template>
 <script>
   /* eslint-disable no-unused-vars */
 import pointerScroll from "./pointerScroll";
+import IconTimes from "./Icons/Times";
+import IconToggle from "./Icons/Toggle";
 export default {
   name: 'vue-single-select',
+  components:{
+    IconTimes,
+    IconToggle
+  },
   props: {
     value: {
       required: true
@@ -260,6 +261,7 @@ export default {
   },
   watch: {
     value(curr, prev) {
+      console.log(curr, 'val');
       this.selectedOption = curr;
     },
     searchText(curr, prev) {

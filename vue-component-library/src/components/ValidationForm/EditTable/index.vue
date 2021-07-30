@@ -8,7 +8,7 @@
               <slot name="header"/>
             </div>
           </div>
-            <b-table-simple hover  responsive>
+            <b-table-simple hover >
                 <b-tbody>
                     <template
                         v-for="(item ) in editItems"

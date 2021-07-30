@@ -21,11 +21,15 @@
 
       @filtered="$emit('filtered', $event)"
     >
-            <!-- #[gomycell(header)]="{item}"  -->
-          <!-- <slot
+        <template 
+          v-for="header in rowBuilder.fields"
+          #[gomycell(header)]="{item}" 
+        >
+          <slot
             :name="header.key"
             :item="item"
-          /> -->
+          />
+        </template>
 
         <template 
             v-for="header in rowBuilder.fields"

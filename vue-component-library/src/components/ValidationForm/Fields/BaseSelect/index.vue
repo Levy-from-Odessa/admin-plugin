@@ -10,7 +10,7 @@
       :class="{ 
         'is-invalid': hasError,
       }"
-			:value="valueBuffer"
+			:value="value"
 			:options="options"
 			:option-label="showLabel || null"
 			@input="input"
@@ -31,11 +31,6 @@ export default {
   name: 'FtthValBaseSelect',
   components:{
     AutoComplete
-  },
-  data() {
-    return {
-      valueBuffer: ''
-    }
   },
   props: {
     label: {

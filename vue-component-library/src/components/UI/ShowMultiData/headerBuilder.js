@@ -18,7 +18,6 @@ export default {
 			})
 
 			this.allHeaders = newHeaders
-			// this.$refs.gridBody.refresh()
 
     },
 		convertToSentenceCase(str){
@@ -44,9 +43,11 @@ export default {
 			if (dataTable && !isExistAllHeaders) {
 					const allHeaders = []
 					const exampleRow = dataTable[0]
-					const actionHeader = {key: 'actions', label: 'actions', show: true}
 					const defaultHeaders = {} 
+
+
 					if (exampleRow) {
+						// save input headers in show/hide format
 						this.headers.forEach(header => {
 							const label = this.$t(this.convertToSentenceCase(header.label))
 							defaultHeaders[header.key] = {
@@ -55,6 +56,8 @@ export default {
 								show: true
 							}
 						})
+
+						// get column from first obj
 						Object.keys(exampleRow).forEach(headerKey => {
 								let flagShow = false
 
@@ -65,9 +68,19 @@ export default {
 									key:  headerKey,
 									show: flagShow
 								}
+
+								// save or default header (that was put in parent) or other 
 								allHeaders.push(defaultHeaders[headerKey] || headerItem)
 						})
-						allHeaders.push(actionHeader)
+
+						// condition fot adding action column
+						const actionPerm = this.tableView || this.tableDelete || this.tableCreate
+						const actionHeader = {key: 'actions', label: 'actions', show: true}
+						if (defaultHeaders.actions && actionPerm) {
+							allHeaders.push(actionHeader)
+						}
+						
+						
 						this.allHeaders = allHeaders
 					}
 			}

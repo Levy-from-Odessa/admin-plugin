@@ -20,8 +20,9 @@
 		</span>
 
 
-		<SingleSelect
-			:value="valueBuffer"
+		<AutoComplete
+      ref="autoComplete"
+			value=""
 			:options="filtredOptions"
 			:option-label="showLabel"
 			@input="addTag"
@@ -30,8 +31,12 @@
 </template>
 
 <script>
+import AutoComplete from '../BaseSelect/AutoComplete'
 export default {
   name: 'FtthValBaseSelectTag',
+  components:{
+    AutoComplete
+  },
   props: {
     label: {
       type: String,
@@ -54,24 +59,19 @@ export default {
       default: () => []
     }
   },
-  data() {
-    return {
-      valueBuffer: ''
-    }
-  },
   methods: {
     addTag(newValue){
-      if (!newValue) {
-        return
-      }
+      if (!newValue) {return}
       const values = Object.assign([], this.value)
       values.push(newValue)
 
       const valuesShowValue = values.map(val => val[this.showValue])
-      this.valueBuffer = ''
 
       this.$emit('input', valuesShowValue)
       this.$emit('submit-form' )
+
+
+      this.$refs.autoComplete.closeOut()
     },
     removeTag(delValue){
       if (!delValue) {
