@@ -1,19 +1,17 @@
 
-import pluralize from 'pluralize'
-/* eslint-disable camelcase */
+import pluralize from 'pluralize' /* eslint-disable camelcase */
 
 import Cookie from 'js-cookie'
 import jwtDecoded from 'jwt-decode'
-
-/*
-  TOKEN
-*/
 
 // Get the client cookie
 export const getcookiesInClient = (key) => {
   return Cookie.get(key) || false
 }
 
+/*
+  TOKEN
+*/
 export const setcookiesToken = (token) => {
   Cookie.set('token', token)
 }

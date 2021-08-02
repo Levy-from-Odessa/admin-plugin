@@ -118,7 +118,7 @@ export default {
           
           
           
-          this.putUrlQuery(this.query)
+          // this.putUrlQuery(this.query)
           
           console.log(`${this.store.name}/${fetchData}(${payload})`);
           
