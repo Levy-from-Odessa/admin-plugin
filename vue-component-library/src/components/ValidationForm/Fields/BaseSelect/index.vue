@@ -66,17 +66,14 @@ export default {
     search(val){
       this.$emit('search', val)
     },
-    input(valueLabel){
-      if (!valueLabel) {
-      
+    input(value){
+      if (!value) {
         return;
       }
       const option = this.options.find(option => {
-        return option[this.showLabel] === valueLabel|| 
-        option === valueLabel
+        return option[this.showValue] === value|| 
+        option === value
       })
-
-
 
       const valueOfOption = option[this.showValue] || option 
 
@@ -85,7 +82,7 @@ export default {
 
       option 
         ? this.$emit('input', valueOfOption )
-        : this.$emit('start-input',  valueLabel);
+        : this.$emit('start-input',  value);
     }
   }
 }

@@ -108,11 +108,14 @@ export default {
           const { actions: { fetchData, propsData } } = this.copyStore
           const payload = { 
             ...this.routeQuery, // from url
-            ...query, // local
+            ...query, // input
+            ...this.query, // local
             ...propsData, // initial filters
             ...this.order, // asc/desc for each
             ...this.inputQuery // new filters from parent
           } 
+
+          console.log(payload, 'payload');
           
           this.query = payload
           
@@ -133,19 +136,23 @@ export default {
           ? 'DESC'
           : 'ASC';
 
-        // leave only one order
-        Object.keys(this.query).forEach((queryItem) => {
-          if (queryItem.includes('order') && queryItem !== orderName) {
-            delete this.query[queryItem];
-          }
-        });
+          console.log(this.query, 'query in on clicked header');
+          
+          this.order = { 
+            [`order[${orderName}]`]: direction 
+          };
+          
+          // leave only one order
+          Object.keys(this.query).forEach((queryItem) => {
+            if (queryItem.includes('order') && queryItem !== orderName) {
+              console.log(this.query);
+              delete this.query[queryItem];
+            }
+          });
+          
+          this.fetch();
 
-        this.order = { 
-          [`order[${orderName}]`]: direction 
-        };
-
-        this.fetch();
-      },
+        },
       putUrlQuery(payload){
         const query = payload 
         const path = this.$route.path

@@ -22,13 +22,13 @@
                     </button>
                     <b-button 
                         v-if="topTable.search"
-                        @click="showSearch = !showSearch"
+                        @click="toggleShow('search')"
                         variant="primary"
                     >
-                        <i :class="` fas fa-${showSearch ? 'times' : 'search'}`"></i>
+                        <i :class="` fas fa-${show.search ? 'times' : 'search'}`"></i>
                     </b-button>
                     <b-button 
-                        @click="showProp = !showProp"
+                        @click="toggleShow('prop')"
                     >
                         <i :class="` fas fa-cog`"></i>
                     </b-button>
@@ -45,12 +45,12 @@
             </div>
         </div>
         <transition name="search-item">
-          <div class="search-item" v-if="showSearch">
+          <div class="search-item" v-if="show.search">
                 <slot name="search" :query="query"/>
           </div>
         </transition>
         <transition name="search-item">
-          <div class="search-item" v-if="showProp">
+          <div class="search-item" v-if="show.prop">
                 <slot name="propreties" :query="query"/>
           </div>
         </transition>
@@ -84,8 +84,10 @@ export default {
     },
     data() {
         return {
-            showSearch: false,
-            showProp: false,
+            show: {
+                search: false,
+                prop: false,
+            }
         }
     },
     computed:{
@@ -123,6 +125,17 @@ export default {
                 ? icon = 'list'
                 : icon = 'table'
             return icon
+        },
+
+
+        toggleShow(flag){
+            Object.keys(this.show).forEach(showKey => {
+                if(showKey == flag){
+                    this.show[flag] = !this.show[flag]
+                }else {
+                    this.show[showKey] = false
+                }
+            })
         }
     }
         
