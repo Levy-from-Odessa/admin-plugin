@@ -74,7 +74,6 @@ export default {
 						// condition fot adding action column
 						const actionPerm = this.tableView || this.tableDelete || this.tableCreate
 						const actionHeader = defaultHeaders.find(headerItem => headerItem.key === 'actions')
-						console.log(defaultHeaders);
 						if (actionHeader && actionPerm) {
 							allHeaders.push(actionHeader)
 						}

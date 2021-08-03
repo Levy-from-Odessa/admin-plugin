@@ -5,7 +5,6 @@
     <label v-if="label" class="mb-1 mt-3">
       {{label}}
     </label>
-        <!-- 'error': hasError, -->
 		<AutoComplete
       :class="{ 
         'is-invalid': hasError,
@@ -13,6 +12,7 @@
 			:value="value"
 			:options="options"
 			:option-label="showLabel || null"
+			:option-key="showValue || null"
 			@input="input"
 			@search="search"
 		/>
@@ -67,22 +67,19 @@ export default {
       this.$emit('search', val)
     },
     input(value){
-      if (!value) {
-        return;
-      }
-      const option = this.options.find(option => {
-        return option[this.showValue] === value|| 
-        option === value
-      })
+      if (!value) {return;}
 
-      const valueOfOption = option[this.showValue] || option 
+      // const option = this.options.find(option => {
+      //   return option[this.showValue] === value|| 
+      //   option === value
+      // })
 
-      console.log(valueOfOption);
+      // const valueOfOption = option[this.showValue] || option 
 
 
-      option 
-        ? this.$emit('input', valueOfOption )
-        : this.$emit('start-input',  value);
+      // option ?
+        this.$emit('input', value)
+        this.$emit('start-input',  value);
     }
   }
 }

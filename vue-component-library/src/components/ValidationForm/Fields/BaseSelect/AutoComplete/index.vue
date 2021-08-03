@@ -63,7 +63,7 @@
         ref="match"
         :required="required"
         @input="switchToSearch($event)"
-        :value="getOptionDescription(selectedOption)"
+        :value="getOptionDescription(getInputValue(selectedOption))"
       />
       <input 
         type="hidden" 
@@ -175,9 +175,6 @@ export default {
     getOptionDescription: {
       type: Function,
       default: function(option) {
-        if (this.optionKey && this.optionLabel) {
-          return option[this.optionKey] + " " + option[this.optionLabel];
-        }
         if (this.optionLabel) {
           return option[this.optionLabel];
         }
@@ -186,6 +183,20 @@ export default {
         }
         return option;
       }
+    },
+    getInputValue: {
+      type: Function,
+      default: function(value) {
+        return this.options.find(option => {
+          if (this.optionKey) {
+            console.log(option[this.optionKey], value);
+            return option[this.optionKey] === value;
+          }
+          return option === value
+        })
+
+      }
+
     },
     getOptionValue: {
       type: Function,
@@ -261,7 +272,7 @@ export default {
   },
   watch: {
     value(curr, prev) {
-      console.log(curr, 'val');
+      console.log(curr, 'auto complete new val');
       this.selectedOption = curr;
     },
     searchText(curr, prev) {
@@ -370,7 +381,11 @@ export default {
         this.pointer++;
       }
 
-      this.selectedOption = this.matchingOptions[this.pointer];
+      this.selectedOption = this.optionKey 
+          ? this.matchingOptions[this.pointer][this.optionKey] 
+          : this.matchingOptions[this.pointer];
+
+
       this.searchText = null;
       this.dropdownOpen = false;
       this.pointer = -1;
