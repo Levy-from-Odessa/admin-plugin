@@ -53,5 +53,9 @@ export default{
        return this.actions.create
       }return false
     },
+
+    tableActionColumn(){
+      return this.tableView || this.tableDelete || this.tableCreate
+    }
   },
 }

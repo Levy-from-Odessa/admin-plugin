@@ -29,20 +29,7 @@ export default {
         }
       ]
     },
-    defaultHeaders:{
-      type: Array,
-      default: () => []
-    },
-    /*
-    [...{text: str, value: str}]
-     */
-    // sortBy: {
-    //   type: Array,
-    //   default: () => []
-    // },
-    /*
-      [...str]
-     */
+   
     topTable: {
       type: Object,
       default: () => ({
@@ -108,14 +95,12 @@ export default {
           const { actions: { fetchData, propsData } } = this.copyStore
           const payload = { 
             ...this.routeQuery, // from url
-            ...query, // input
             ...this.query, // local
             ...propsData, // initial filters
             ...this.order, // asc/desc for each
-            ...this.inputQuery // new filters from parent
+            ...query, // input
           } 
-
-          console.log(payload, 'payload');
+          
           
           this.query = payload
           
@@ -123,12 +108,12 @@ export default {
           
           // this.putUrlQuery(this.query)
           
-          console.log(`${this.store.name}/${fetchData}(${payload})`);
           
-          this.$store.dispatch(`${this.store.name}/${fetchData}`, 
-            payload 
-          )
-          }
+          this.$store.dispatch(`${this.store.name}/${fetchData}`, {
+            ...payload,
+            ...this.inputQuery // new filters from parent
+          })
+        }
       },
       onHeaderClicked(orderName) {
         // toggle order
@@ -136,7 +121,6 @@ export default {
           ? 'DESC'
           : 'ASC';
 
-          console.log(this.query, 'query in on clicked header');
           
           this.order = { 
             [`order[${orderName}]`]: direction 
@@ -145,7 +129,6 @@ export default {
           // leave only one order
           Object.keys(this.query).forEach((queryItem) => {
             if (queryItem.includes('order') && queryItem !== orderName) {
-              console.log(this.query);
               delete this.query[queryItem];
             }
           });
@@ -156,7 +139,6 @@ export default {
       putUrlQuery(payload){
         const query = payload 
         const path = this.$route.path
-        console.log(this.$route.path, payload) ;
         this.$router.replace({path, query}).catch(()=>{})
       }
     },

@@ -2,7 +2,9 @@
     <div v-if="topTable.title || topTable.search || topTable.create">
         <div class="row justify-content-between algin-center pb-2 border-bottom">
             <div class="col">
-                <h4 class="card-title">{{topTable.title}}</h4>
+                <h4 class="card-title">
+                    {{topTable.title}}
+                </h4>
             </div>
 
 

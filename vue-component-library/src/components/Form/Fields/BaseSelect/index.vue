@@ -1,36 +1,28 @@
 <template>
-  <b-form-group
-    class="mb-3"
-    label-cols-lg="4"
-    :label="label"
+  <div
+    class="input"
   >
-    <b-form-select
-      class="form-control"
-      style="width: 100%"
-    >
-      <b-form-select-option 
-        :value="null"
-        @click="$emit('input', null)"
-      >
-        All
-      </b-form-select-option>
-
-      <b-form-select-option
-        class="option"
-        v-for="item in options"
-        :key="item[showValue] ||item"
-        :value="item"
-        @click="$emit('input', item[showValue] || item)"
-      >
-        {{ item[showLabel] || item}}
-      </b-form-select-option>
-    </b-form-select>
-  </b-form-group>
+    <label v-if="label" class="mb-1 mt-3">
+      {{label}}
+    </label>
+		<AutoComplete
+			:value="value"
+			:options="options"
+			:option-label="showLabel "
+			:option-key="showValue "
+			@input="input"
+			@search="search"
+		/>
+  </div>
 </template>
 
 <script>
+import AutoComplete from '../../../ValidationForm/Fields/BaseSelect/AutoComplete'
 export default {
   name: 'FtthSimpleSelect',
+  components:{
+    AutoComplete
+  },
   props: {
     label: {
       type: String,
@@ -42,15 +34,35 @@ export default {
     },
     showValue: {
       type: String,
-      default: () => 'value'
+      default: () => null
     },
     showLabel: {
       type: String,
-      default: () => 'name'
+      default: () => null
     },
     options: {
       type: Array,
       default: () => []
+    }
+  },
+  methods: {
+    search(val){
+      this.$emit('search', val)
+    },
+    input(value){
+      if (!value) {return;}
+
+      // const option = this.options.find(option => {
+      //   return option[this.showValue] === value|| 
+      //   option === value
+      // })
+
+      // const valueOfOption = option[this.showValue] || option 
+
+
+      // option ?
+        this.$emit('input', value)
+        this.$emit('start-input',  value);
     }
   }
 }

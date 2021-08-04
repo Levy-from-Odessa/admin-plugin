@@ -1,18 +1,30 @@
 <template>
-  <b-form-group
-    class="mb-3"
-    label-cols-lg="4"
-    :label="label"
-  >
+  <div class="">
+    <b-form-group
+      class="mb-3"
+      label-cols-lg="4"
+      :label="label"
+      v-if="label"
+    >
+      <DatePicker 
+        v-model="pickerValue"
+        value-type="format"
+        range 
+        append-to-body 
+        lang="en" 
+        confirm
+      />
+    </b-form-group>
     <DatePicker 
+      v-else
       v-model="pickerValue"
       value-type="format"
       range 
       append-to-body 
       lang="en" 
       confirm
-     />
-  </b-form-group>
+    />
+  </div>
 </template>
 
 <script>

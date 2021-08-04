@@ -33,28 +33,29 @@ export default {
       return this.allHeaders 
 				&& this.allHeaders.filter(header => header.show)
     },
+		defaultHeaders(){
+			const savedHeaders = getLocalStorage(this.store.name)
+			
+			// save input or saved headers in visible forma
+			return savedHeaders || this.headers.map(header => {
+				const label = this.$t(this.convertToSentenceCase(header.label))
+				return { 
+					...header,
+						label,
+						show: true
+					}
+			})
+		}
 	},
 	
 	watch:{
 		dataTable(dataTable){
-			const isExistAllHeaders = this.allHeaders.length > 0
-			if (dataTable && !isExistAllHeaders) {
+			// const isExistAllHeaders = this.allHeaders.length > 0
+			if (dataTable ) {
 					const allHeaders = []
 					const exampleRow = dataTable[0]
 
 					if (exampleRow) {
-						const savedHeaders = getLocalStorage(this.store.name)
-						
-						// save input or saved headers in visible forma
-						const defaultHeaders = savedHeaders || this.headers.map(header => {
-							const label = this.$t(this.convertToSentenceCase(header.label))
-							return { 
-								...header,
-									label,
-									show: true
-								}
-						})
-
 						// get columns from first obj from DB
 						Object.keys(exampleRow).forEach(headerKey => {
 
@@ -67,23 +68,24 @@ export default {
 								}
 
 								// save or default header (that was put in parent) or other (from BD)
-								const defaultHeaderItem = defaultHeaders.find(headerItem => headerItem.key === headerKey)
+								const defaultHeaderItem = this.defaultHeaders.find(headerItem => headerItem.key === headerKey)
 								allHeaders.push(defaultHeaderItem || headerItem)
 						})
 
 						// condition fot adding action column
-						const actionPerm = this.tableView || this.tableDelete || this.tableCreate
-						const actionHeader = defaultHeaders.find(headerItem => headerItem.key === 'actions')
+						const actionPerm = this.tableActionColumn
+						const actionHeader = this.defaultHeaders.find(headerItem => headerItem.key === 'actions')
+
 						if (actionHeader && actionPerm) {
 							allHeaders.push(actionHeader)
 						}
 
-						this.allHeaders = allHeaders
+						this.allHeaders.push(...allHeaders)
 					}
 			}
 		},
 		showHeaders(headers) {
 			setLocalStorage(this.store.name,  headers);
-		}
+		},
 	}
 }

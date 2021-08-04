@@ -50,7 +50,9 @@
             @keyup.down="movePointerDown"
             @click.prevent="setOption"
           >
-            <slot name="option" v-bind="{option,idx}">{{ getOptionDescription(option) }}</slot>
+            <slot name="option" v-bind="{option,idx}">
+              {{ getOptionDescription(option) }}
+            </slot>
           </li>
         </ul>
       </div>
@@ -189,7 +191,6 @@ export default {
       default: function(value) {
         return this.options.find(option => {
           if (this.optionKey) {
-            console.log(option[this.optionKey], value);
             return option[this.optionKey] === value;
           }
           return option === value
@@ -272,7 +273,6 @@ export default {
   },
   watch: {
     value(curr, prev) {
-      console.log(curr, 'auto complete new val');
       this.selectedOption = curr;
     },
     searchText(curr, prev) {
