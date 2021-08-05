@@ -71,14 +71,6 @@ export default {
 								allHeaders.push(defaultHeaderItem || headerItem)
 						})
 
-						// condition fot adding action column
-						const actionPerm = this.tableActionColumn
-						const actionHeader = this.defaultHeaders.find(headerItem => headerItem.key === 'actions')
-
-						if (actionHeader && actionPerm) {
-							allHeaders.push(actionHeader)
-						}
-
 						this.allHeaders = allHeaders
 					}
 			}
@@ -86,5 +78,20 @@ export default {
 		showHeaders(headers) {
 			setLocalStorage(this.store.name,  headers);
 		},
+		allHeaders (allHeaders) {
+			// condition fot adding action column
+			const isExistActionHeader = allHeaders.find(headerItem => headerItem.key === 'actions')
+			if (!isExistActionHeader) {
+				const actionPerm = this.tableActionColumn //if user have perm for action col
+
+				const actionHeader = 
+					this.defaultHeaders.find(headerItem => headerItem.key === 'actions') || 
+          { key: "actions", label: this.$t("Actions"), show: false } // define is it saved to show, else to hide
+
+				if (actionHeader && actionPerm) {
+					this.allHeaders.push(actionHeader)
+				}
+			}
+		}
 	}
 }
