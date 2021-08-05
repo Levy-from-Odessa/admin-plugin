@@ -168,14 +168,6 @@ import Propreties from '../Additional/Propreties'
  **/
 export default {
   name: 'FtthShowMultiData',
-  page: {
-    title: "Advanced Table",
-    meta: [
-      {
-        name: "description",
-      },
-    ],
-  },
   
   mixins: [
     DeleteMixin,

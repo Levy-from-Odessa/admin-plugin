@@ -50,8 +50,7 @@ export default {
 	
 	watch:{
 		dataTable(dataTable){
-			// const isExistAllHeaders = this.allHeaders.length > 0
-			if (dataTable ) {
+			if (dataTable) {
 					const allHeaders = []
 					const exampleRow = dataTable[0]
 
@@ -80,7 +79,7 @@ export default {
 							allHeaders.push(actionHeader)
 						}
 
-						this.allHeaders.push(...allHeaders)
+						this.allHeaders = allHeaders
 					}
 			}
 		},

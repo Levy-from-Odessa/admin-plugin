@@ -1,18 +1,29 @@
 <template>
-  <div
-    class="input"
-  >
-    <label v-if="label" class="mb-1 mt-3">
-      {{label}}
-    </label>
-		<AutoComplete
-			:value="value"
-			:options="options"
-			:option-label="showLabel "
-			:option-key="showValue "
-			@input="input"
-			@search="search"
-		/>
+  <div class="">
+    <b-form-group
+      v-if="label"
+      class="mb-3"
+      label-cols-lg="4"
+      :label="label"
+    >
+      <AutoComplete
+        :value="value"
+        :options="options"
+        :option-label="showLabel "
+        :option-key="showValue "
+        @input="input"
+        @search="search"
+      />
+    </b-form-group>
+    <AutoComplete
+      v-else
+      :value="value"
+      :options="options"
+      :option-label="showLabel "
+      :option-key="showValue "
+      @input="input"
+      @search="search"
+    />
   </div>
 </template>
 

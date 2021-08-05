@@ -120,7 +120,7 @@ export default {
     placeholder: {
       type: String,
       required: false,
-      default: () => "Search Here"
+      default: () => ""
     },
     maxHeight: {
       type: String,
