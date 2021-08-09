@@ -7,7 +7,6 @@
                 </h4>
             </div>
 
-
             <div class="col-4">
                 <slot name="header"/>
             </div>

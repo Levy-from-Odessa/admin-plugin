@@ -113,7 +113,6 @@ export default {
   .invalid-tooltip{
     position: absolute;
     top: auto;
-
   }
 }
 .error{

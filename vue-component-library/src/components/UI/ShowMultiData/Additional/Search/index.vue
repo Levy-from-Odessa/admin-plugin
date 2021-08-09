@@ -7,6 +7,7 @@
         >
           Clear
         </b-btn>
+        {{editQuery}}
         <FtthSimpleForm 
           :schema="schema"
           v-model="editQuery"
@@ -36,7 +37,12 @@ export default {
   computed:{
     editQuery:{
       get(){
-        return this.query
+        const joinQuerybySchema = Object.keys(this.schema).map(schemaKey => {
+          console.log(this.query[schemaKey]);
+          return {[schemaKey]: this.query[schemaKey] || ''}
+        })
+        console.log(joinQuerybySchema);
+        return Object.assign({}, ...joinQuerybySchema);
       },
       set(value){
         console.log(value.allValues);

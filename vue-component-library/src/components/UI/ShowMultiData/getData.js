@@ -93,25 +93,31 @@ export default {
       fetch (query = {}) {
         if (this.copyStore.actions) {
           const { actions: { fetchData, propsData } } = this.copyStore
+
+
+
+          console.log(query.page);
+
+          
           const payload = { 
             ...this.routeQuery, // from url
             ...this.query, // local
             ...propsData, // initial filters
             ...this.order, // asc/desc for each
+            page: 1,
             ...query, // input
           } 
           
           
+          
           this.query = payload
-          
-          
           
           // this.putUrlQuery(this.query)
           
           
           this.$store.dispatch(`${this.store.name}/${fetchData}`, {
             ...payload,
-            ...this.inputQuery // new filters from parent
+            ...this.inputQuery // new filters from parent, no need to save in table
           })
         }
       },

@@ -123,14 +123,14 @@
               </TableListBody>
             </transition>
 
-              <!-- Pagination -->
-                <TablePagination 
-                    v-if="actions.pagination"
-                    :rows="totalItems" 
-                    :perPage="perPage"
-                    :current-page="currentPage"
-                    @setCurrentPage="setCurrentPage"
-                />
+          <!-- Pagination -->
+            <TablePagination 
+                v-if="actions.pagination"
+                :rows="totalItems" 
+                :perPage="perPage"
+                :current-page="currentPage"
+                @setCurrentPage="setCurrentPage"
+            />
           </template>
         </div>
       <ModalDelete 
@@ -174,7 +174,6 @@ export default {
     getData, 
     permissions, 
     headerBuilder
-    // DeleteMixin
   ],
 
   components: {
@@ -190,7 +189,6 @@ export default {
       Search,
       Propreties
 
-      // ModalDelete,
   },
   data() {
     return {
@@ -221,6 +219,7 @@ export default {
   },
   methods:{
     onFiltered(filteredItems) {
+      console.log(filteredItems, 'filtred items');
       this.totalRows = filteredItems.length;
       this.currentPage = 1;
     },
@@ -234,7 +233,6 @@ export default {
     slotExist(name){
       return typeof this.$scopedSlots[name] !== 'undefined'
     },
-
   },
 
   computed: {

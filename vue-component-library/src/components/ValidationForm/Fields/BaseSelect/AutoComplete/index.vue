@@ -138,7 +138,7 @@ export default {
       default: () => {
         return {
           pointer: -1,
-          wrapper: "single-select-wrapper",
+          wrapper: "single-select-wrapper form-control",
           input: "search-input",
           icons: "icons",
           required: "required",
@@ -405,6 +405,10 @@ export default {
 };
 </script>
 <style scoped>
+input {
+  outline: none
+
+}
 .w-full {
   width: 100%;
 }
@@ -560,7 +564,8 @@ export default {
   color: #495057;
   background-color: #fff;
   background-clip: padding-box;
-  border: 1px solid #ced4da;
+  /* border: 1px solid #ced4da; */
+  border: none;
   border-radius: 0.25em;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
   box-sizing: border-box;

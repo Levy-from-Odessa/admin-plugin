@@ -19,8 +19,8 @@
       @input="$emit('input', $event)"
       @row-dblclicked="$emit('view', $event)"
 
-      @filtered="$emit('filtered', $event)"
     >
+      <!-- @filtered="$emit('filtered', $event)" -->
         <template 
           v-for="header in rowBuilder.fields"
           #[gomycell(header)]="{item}" 
