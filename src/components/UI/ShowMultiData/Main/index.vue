@@ -62,8 +62,9 @@
                 :headersLength="headers.length"
             />
 
-            <!-- v-if="dataTable && dataTable.length !== 0"> -->
-          <template  >
+          <template 
+            v-if="dataTable && dataTable.length !== 0"
+          > 
             <!-- Grid Body -->
             <transition name="template-view">
               <TableGridBody 
@@ -131,6 +132,7 @@
               </TableListBody>
             </transition>
 
+          </template>
             <!-- Pagination -->
             <TablePagination 
                 v-if="actions.pagination"
@@ -139,7 +141,6 @@
                 :current-page="currentPage"
                 @setCurrentPage="setCurrentPage"
             />
-          </template>
         </div>
       <ModalDelete 
         @close="showDeleteModal = false" 

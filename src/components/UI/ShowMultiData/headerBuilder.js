@@ -59,7 +59,7 @@ export default {
 	
 	watch:{
 		dataTable(dataTable){
-			if (dataTable) {
+			if (dataTable && dataTable.length > 1) {
 					this.allHeaders = []
 					const exampleRow = dataTable[0]
 					this.setDefaultHeaders()
