@@ -1,6 +1,6 @@
 {
   "name": "savtest",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "private": false,
   "main": "dist/index.umd.min.js",
   "files": [
@@ -27,6 +27,7 @@
     "savtest": "^0.0.57",
     "simplebar-vue": "^1.6.3",
     "vue": "^2.6.11",
+    "vue-cli": "^2.9.6",
     "vue-i18n": "^8.24.4",
     "vue2-datepicker": "^3.9.0",
     "vuelidate": "^0.7.6",

@@ -85,8 +85,8 @@
               >
               <!-- Cols -->
                 <template 
+                    v-for="header in showHeaders"
                     #[gomycell(header.key)]="{item}" 
-                    v-for="header in headers"
                 >
                     <slot
                       :name="header.key"

@@ -1,8 +1,10 @@
 import {setLocalStorage , getLocalStorage} from '../../../utils/localStorage';
+import toSentenceCase from '../../../utils/toSentenceCase';
 export default {
 	data() {
 		return {
-			allHeaders: []
+			allHeaders: [], 
+			defaultHeaders: [],
 		}
 	},
 
@@ -18,26 +20,14 @@ export default {
 
 			this.allHeaders = newHeaders
     },
+		setDefaultHeaders(){
+			const localStorageHeaders = getLocalStorage(this.store.name) 
 
-		convertToSentenceCase(str){
-			if (!str) {return}
+			const savedHeaders = localStorageHeaders  
 
-			const result = str.replace(/([A-Z])/g,' $1');
-			const final = result.charAt(0).toUpperCase()+result.slice(1);
-			return final
-		}
-	},
-	
-	computed: {
-    showHeaders(){
-      return this.allHeaders 
-				&& this.allHeaders.filter(header => header.show)
-    },
-		defaultHeaders(){
-			const savedHeaders = getLocalStorage(this.store.name)
 
 			const defaultHeaders = this.headers.map(header => {
-				const label = this.$t(this.convertToSentenceCase(header.label))
+				const label = this.$t(toSentenceCase(header.label))
 				return { 
 					...header,
 						label,
@@ -51,15 +41,28 @@ export default {
 			}
 			
 			// save input or saved headers in visible forma
-			return savedHeaders || 	defaultHeaders
+			const isSavedHeaders = savedHeaders.length > 0 
+			this.defaultHeaders = isSavedHeaders 
+				? savedHeaders 
+				: defaultHeaders
 		}
+	},
+	
+	computed: {
+    showHeaders(){
+      return this.allHeaders 
+				&& this.allHeaders.filter(header => header.show)
+    },
+
+
 	},
 	
 	watch:{
 		dataTable(dataTable){
 			if (dataTable) {
-					const allHeaders = []
+					this.allHeaders = []
 					const exampleRow = dataTable[0]
+					this.setDefaultHeaders()
 
 					if (exampleRow) {
 						// get columns from first obj from DB
@@ -68,23 +71,25 @@ export default {
 								if(headerKey.includes('@')) { return }
 
 								const headerItem = {
-									label: this.$t(this.convertToSentenceCase(headerKey)),
+									label: this.$t(toSentenceCase(headerKey)),
 									key:  headerKey,
 									show: false
 								}
 
 								// save or default header (that was put in parent) or other (from BD)
-								const defaultHeaderItem = this.defaultHeaders.find(headerItem => headerItem.key === headerKey)
-								allHeaders.push(defaultHeaderItem || headerItem)
+								const defaultHeaderItem = this.defaultHeaders.find(headerItem => 
+									headerItem.key === headerKey
+								)
+
+								this.allHeaders.push(defaultHeaderItem || headerItem)
 						})
 
-						this.allHeaders = allHeaders
 					}
 			}
 		},
 		showHeaders(headers) {
 			// dont fetch and dont save headers from local storage 
-			if (!this.strongHeaders) {
+			if (!this.strongHeaders && headers.length > 0) {
 				setLocalStorage(this.store.name,  headers);
 			}
 		},
@@ -103,5 +108,6 @@ export default {
 				}
 			}
 		}
-	}
+	},
+
 }

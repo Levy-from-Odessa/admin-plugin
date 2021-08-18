@@ -40,13 +40,11 @@ export default {
         // save only query items that are in schema
         // to avoid another and make not possible to update items (page, sort) 
         const joinQuerybySchema = Object.keys(this.schema).map(schemaKey => {
-          console.log(this.query[schemaKey]);
           return {[schemaKey]: this.query[schemaKey] || ''}
         })
         return Object.assign({}, ...joinQuerybySchema);
       },
       set(value){
-        console.log(value.allValues);
         this.$emit('search', value.allValues)
       }
     }

@@ -358,7 +358,7 @@ export default {
     closeOut() {
       this.selectedOption = null;
       this.dropdownOpen = false;
-      this.searchText = null;
+      this.searchText = '';
     },
     movePointerDown() {
       if (!this.matchingOptions) {

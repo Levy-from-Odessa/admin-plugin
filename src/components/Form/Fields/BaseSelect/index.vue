@@ -40,7 +40,7 @@ export default {
       default: () => ''
     },
     value: {
-      type: String,
+      type: [String, Object, Number],
       default: () => ''
     },
     showValue: {
@@ -61,7 +61,7 @@ export default {
       this.$emit('search', val)
     },
     input(value){
-      if (!value) {return;}
+      // if (!value) {return;}
 
       // const option = this.options.find(option => {
       //   return option[this.showValue] === value|| 
