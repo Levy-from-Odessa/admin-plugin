@@ -102,7 +102,7 @@ export default {
 
 
 
-          console.log(query);
+          console.log(fetchData);
 
           
           const payload = { 

@@ -53,13 +53,11 @@ export default {
       return this.allHeaders 
 				&& this.allHeaders.filter(header => header.show)
     },
-
-
 	},
 	
 	watch:{
 		dataTable(dataTable){
-			if (dataTable && dataTable.length > 1) {
+			if (dataTable && dataTable.length > 0) {
 					this.allHeaders = []
 					const exampleRow = dataTable[0]
 					this.setDefaultHeaders()
