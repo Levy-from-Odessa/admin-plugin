@@ -91,18 +91,22 @@ export default {
       })
 
     },
-    update (key, value, field) {
+    update (key, inputValue, field) {
       const item = field
+      let allFormValue = Object.assign({}, this.value)
+
+
       // *function
       if (item.function) {
-        value = item.function(value)
+        inputValue = item.function(inputValue)
       }
+      console.log(this.value);
 
       // *range
       if (item.range) {
-        this.value = this.rangeValues(item, key, value)
+        allFormValue = this.rangeValues(item, key, inputValue)
       }else{
-        this.value[key] = value
+        allFormValue[key] = inputValue
       }
 
       // this.$emit('input', {...this.value})
@@ -110,9 +114,9 @@ export default {
       // *monitor changes
       this.$emit('changedItem', {
         changedItem: {
-          key, item, value
+          key, item, inputValue
         },
-        allValues: this.value
+        allValues: allFormValue
       })
     },
 

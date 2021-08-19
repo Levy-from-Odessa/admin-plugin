@@ -11,7 +11,7 @@
           :label="field.label"
           v-bind="{...field}"
           :show-label="field.showLabel"
-          :show-value="field.showValue || key"
+          :show-value="field.showValue"
           :disabled="field.disabled"
           :type="field.type"
 

@@ -389,6 +389,7 @@ export default {
           : this.matchingOptions[this.pointer];
 
 
+
       this.searchText = null;
       this.dropdownOpen = false;
       this.pointer = -1;

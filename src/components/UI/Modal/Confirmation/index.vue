@@ -11,11 +11,11 @@
   >
     {{message}}
    <template #modal-footer>
-      <b-button size="sm"  @click="show= false">
+      <b-button size="sm"  @click="close">
         Cancel
       </b-button>
-      <b-button size="sm" variant="danger" @click="actionHandler">
-        {{action}}
+      <b-button size="sm" :variant="action.color || 'danger'" @click="actionHandler">
+        {{action.text || action}}
       </b-button>
     </template>
   </b-modal>
@@ -58,7 +58,7 @@ export default {
 				this.clear()
 			},
 			close(){
-				this.controller.res()
+				this.controller.res(false)
 				this.clear()
 			}
 		},

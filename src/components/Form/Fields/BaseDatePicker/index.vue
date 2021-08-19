@@ -46,6 +46,7 @@ export default {
   computed: {
     pickerValue: {
       get(){
+        console.log(this.value);
         return this.value
       },
       set(value){

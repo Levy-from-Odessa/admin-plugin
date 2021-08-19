@@ -42,7 +42,7 @@ export default {
     },
     showValue: {
       type: String,
-      default: () => 'value'
+      default: () => ''
     },
     showLabel: {
       type: String,
