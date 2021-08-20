@@ -29,7 +29,7 @@
 
               <template #search>
                 <Search
-                  @search="fetch"
+                  @search="search"
                   @searchOptions="$emit('searchOptions', $event)"
                   :schema="searchSchema"
                   :query="query"
@@ -244,6 +244,10 @@ export default {
     slotExist(name){
       return typeof this.$scopedSlots[name] !== 'undefined'
     },
+    search(search){
+      this.query = {}
+      this.fetch(search)
+    }
   },
 
 

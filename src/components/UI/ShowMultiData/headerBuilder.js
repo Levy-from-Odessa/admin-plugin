@@ -63,6 +63,10 @@ export default {
 					this.setDefaultHeaders()
 
 					if (exampleRow) {
+						// build defaults
+						this.allHeaders.push(...this.defaultHeaders)
+
+
 						// get columns from first obj from DB
 						Object.keys(exampleRow).forEach(headerKey => {
 
@@ -75,11 +79,14 @@ export default {
 								}
 
 								// save or default header (that was put in parent) or other (from BD)
-								const defaultHeaderItem = this.defaultHeaders.find(headerItem => 
+								// add to stack hidden cols
+								const isDefaultHeaderItem = this.defaultHeaders.find(headerItem => 
 									headerItem.key === headerKey
 								)
 
-								this.allHeaders.push(defaultHeaderItem || headerItem)
+								if (!isDefaultHeaderItem) {
+									this.allHeaders.push(headerItem)
+								}
 						})
 
 					}
@@ -95,7 +102,7 @@ export default {
 			// condition fot adding action column
 			const isExistActionHeader = allHeaders.find(headerItem => headerItem.key === 'actions')
 			if (!isExistActionHeader) {
-				const actionPerm = this.tableActionColumn //if user have perm for action col
+				const actionPerm = this.tableActionColumn || this.actions.details //if user have perm for action col
 
 				const actionHeader = 
 					this.defaultHeaders.find(headerItem => headerItem.key === 'actions') || 

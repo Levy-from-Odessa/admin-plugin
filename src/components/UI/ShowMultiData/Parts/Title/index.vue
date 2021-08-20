@@ -1,6 +1,6 @@
 <template>
     <div v-if="topTable.title || topTable.search || topTable.create">
-        <div class="row justify-content-between algin-items-center pb-2 border-bottom">
+        <div class="row justify-content-between align-items-baseline pb-2 border-bottom">
             <div class="col-2">
                 <h4 class="card-title">
                     {{topTable.title}}
@@ -11,15 +11,15 @@
                 <slot name="header"/>
             </div>
 
-            <div class="col-3 ">
-                 <b-button-group>
+            <div class="col-3 d-flex justify-content-center">
+                <b-button-group>
                     <slot 
                         name="button" 
                         :query="query"
                     />
                     <button
                         v-if="topTable.create"
-                        class="btn btn-success "
+                        class="btn btn-success"
                         @click="$emit('create')"
                     >
                         <i class="fas fa-plus "></i>

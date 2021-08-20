@@ -49,14 +49,16 @@ export default {
       if (this.default) {
         return 'secondary'
       }
-      return customEnum[compareItem].color;
+      const item = customEnum[compareItem]
+      return item?.color || '';
     },
     text() {
       const { customEnum, compareItem } = this;
       if (this.default) {
         return compareItem
       }
-      return customEnum[compareItem].text;
+      const item = customEnum[compareItem]
+      return item?.text || '';
     },
 
   },

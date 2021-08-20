@@ -115,7 +115,6 @@ export default {
           } 
           
           
-          
           this.query = payload
           
           // this.putUrlQuery(this.query)

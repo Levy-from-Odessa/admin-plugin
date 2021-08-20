@@ -20,7 +20,7 @@
               :disabled="field.disabled"
               :type="field.type"
 
-              :value="value[key]"
+              :value="value[key] || null"
               @input="update(key, $event , field)"
               @search="search(key, $event , field)"
             />
