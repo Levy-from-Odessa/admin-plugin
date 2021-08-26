@@ -21,7 +21,7 @@ export default {
 			this.allHeaders = newHeaders
     },
 		setDefaultHeaders(){
-			const localStorageHeaders = getLocalStorage(this.store.name) 
+			const localStorageHeaders = getLocalStorage(this.routeName + this.store.name) 
 
 			const savedHeaders = localStorageHeaders  
 
@@ -53,6 +53,9 @@ export default {
       return this.allHeaders 
 				&& this.allHeaders.filter(header => header.show)
     },
+		routeName(){
+			return this.$route.name
+		}
 	},
 	
 	watch:{
@@ -95,7 +98,7 @@ export default {
 		showHeaders(headers) {
 			// dont fetch and dont save headers from local storage 
 			if (!this.strongHeaders && headers.length > 0) {
-				setLocalStorage(this.store.name,  headers);
+				setLocalStorage(this.routeName + this.store.name,  headers);
 			}
 		},
 		allHeaders (allHeaders) {

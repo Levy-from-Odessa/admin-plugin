@@ -57,7 +57,6 @@ export default {
       Object.keys(emptyQuery).forEach(key => {
         emptyQuery[key] = ''
       })
-      this.$emit('search', {})
     }
   },
   
