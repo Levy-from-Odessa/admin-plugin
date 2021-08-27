@@ -40,7 +40,7 @@ export default {
 				return defaultHeaders
 			}
 			
-			// save input or saved headers in visible forma
+			// save input or saved headers in visible form
 			const isSavedHeaders = savedHeaders.length > 0 
 			this.defaultHeaders = isSavedHeaders 
 				? savedHeaders 
@@ -62,12 +62,21 @@ export default {
 		dataTable(dataTable){
 			if (dataTable && dataTable.length > 0) {
 					this.allHeaders = []
+					const allHeaders = []
+
 					const exampleRow = dataTable[0]
 					this.setDefaultHeaders()
 
 					if (exampleRow) {
 						// build defaults
-						this.allHeaders.push(...this.defaultHeaders)
+						// disable action header to set it after headers will be built
+						const defaults = Object.assign([], this.defaultHeaders)
+						const actionHeaderIndex = this.defaultHeaders.findIndex(el => el.key === 'actions')
+						if (actionHeaderIndex !==  -1) {
+							defaults.splice(actionHeaderIndex, 1)
+						}
+
+						allHeaders.push(...defaults)
 
 
 						// get columns from first obj from DB
@@ -88,11 +97,12 @@ export default {
 								)
 
 								if (!isDefaultHeaderItem) {
-									this.allHeaders.push(headerItem)
+									allHeaders.push(headerItem)
 								}
 						})
 
 					}
+					this.allHeaders = allHeaders
 			}
 		},
 		showHeaders(headers) {
@@ -102,18 +112,26 @@ export default {
 			}
 		},
 		allHeaders (allHeaders) {
+			if (allHeaders.length === 0) {
+				return;
+			}
 			// condition fot adding action column
 			const isExistActionHeader = allHeaders.find(headerItem => headerItem.key === 'actions')
-			if (!isExistActionHeader) {
-				const actionPerm = this.tableActionColumn || this.actions.details //if user have perm for action col
+			if (isExistActionHeader) {
+				return;
+			}
 
-				const actionHeader = 
-					this.defaultHeaders.find(headerItem => headerItem.key === 'actions') || 
-          { key: "actions", label: this.$t("Actions"), show: false } // define is it saved to show, else to hide
+			//if user have perm for action col
+			const actionPerm = this.tableActionColumn || this.actions.details
 
-				if (actionHeader && actionPerm) {
-					this.allHeaders.push(actionHeader)
-				}
+			const actionHeader = { 
+							key: "actions", 
+							label: this.$t("Actions"), 
+							show: true
+						}
+
+			if (actionPerm) {
+				this.allHeaders.push(actionHeader)
 			}
 		}
 	},
