@@ -18,11 +18,6 @@ const ComponentLibrary = {
       }
       Vue.component(component.name, component)
     }
-    // Vue.component('Test',
-    // {
-    //   template: '<div class="my-component"><span>Hello</span>, <p class="this-too">world!</p></div>',
-    //   style:    'span, .this-too{ font-color: red }'
-    // });
 
 
     // mixins
@@ -32,6 +27,7 @@ const ComponentLibrary = {
       if (mixin.name === undefined) {
         console.log(`${mixin.__file} doesnt have name, pls set MIXIN name and try again `);
       }
+      
       Vue.mixin(mixins)
     }
 
