@@ -76,6 +76,10 @@ export default {
     inputQuery:{
       type: Object,
       default: () => {}
+    },
+    stream:{
+      type: Boolean,
+      default: () => false
     }
   },
     data() {
@@ -92,7 +96,9 @@ export default {
 
 
             query: {},
-            order: {}
+            order: {},
+
+            streamFetchData: null
         }
     },
     methods: {
@@ -100,10 +106,7 @@ export default {
         if (this.copyStore.actions) {
           const { actions: { fetchData, propsData } } = this.copyStore
 
-
-
           console.log(query);
-
           
           const payload = { 
             ...this.routeQuery, // from url
@@ -158,8 +161,19 @@ export default {
         this.dataTable =  this.readyItems
         this.filteredData = this.readyItems
       } else{
-        this.fetch()
+        if (this.stream) {
+          this.fetch()
+          this.streamFetchData = setInterval(() => {
+            this.fetch() 
+          }, 6000);
+        } else {
+          this.fetch()
+        }
       }
+    },
+    beforeDestroy () {
+      console.log('undefined');
+      clearInterval(this.streamFetchData)
     },
     watch: {
       dataGetter(getter){
